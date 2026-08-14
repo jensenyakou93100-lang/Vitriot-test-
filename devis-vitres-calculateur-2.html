@@ -1,0 +1,2159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vitrio — calculateur de devis vitrerie &amp; menuiserie</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#F3F5FA">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Vitrio">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#F3F5FA;
+    --surface:#FFFFFF;
+    --surface-2:#EEF1F6;
+    --text:#14171F;
+    --text-mid:#5B6472;
+    --accent:#3F63FF;
+    --accent-deep:#2A45D6;
+    --accent-bright:#2E52E8;
+    --accent-cyan:#0E9CB0;
+    --accent-grad:linear-gradient(135deg, #3F63FF 0%, #0E9CB0 100%);
+    --line:#E1E5EC;
+    --glass:rgba(255,255,255,0.62);
+    --glass-border:rgba(20,30,70,0.08);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-variant-numeric: tabular-nums;
+    background-color:var(--ink);
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(63,99,255,0.14), transparent 42%),
+      radial-gradient(circle at 88% 85%, rgba(14,156,176,0.13), transparent 46%),
+      radial-gradient(circle at 90% 10%, rgba(63,99,255,0.08), transparent 40%),
+      repeating-linear-gradient(0deg, rgba(20,30,70,0.035) 0px, rgba(20,30,70,0.035) 1px, transparent 1px, transparent 72px),
+      repeating-linear-gradient(90deg, rgba(20,30,70,0.035) 0px, rgba(20,30,70,0.035) 1px, transparent 1px, transparent 72px),
+      url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%22900%22%20viewBox%3D%220%200%20900%20900%22%3E%0A%3Cg%3E%0A%3Crect%20x%3D%22120%22%20y%3D%2290%22%20width%3D%22700%22%20height%3D%22700%22%20rx%3D%2222%22%20fill%3D%22none%22%20stroke%3D%22rgba%2820%2C30%2C70%2C0.05%29%22%20stroke-width%3D%2212%22/%3E%0A%3Cline%20x1%3D%22120%22%20y1%3D%22323%22%20x2%3D%22820%22%20y2%3D%22323%22%20stroke%3D%22rgba%2820%2C30%2C70%2C0.045%29%22%20stroke-width%3D%227%22/%3E%0A%3Cline%20x1%3D%22120%22%20y1%3D%22556%22%20x2%3D%22820%22%20y2%3D%22556%22%20stroke%3D%22rgba%2820%2C30%2C70%2C0.045%29%22%20stroke-width%3D%227%22/%3E%0A%3Cline%20x1%3D%22353%22%20y1%3D%2290%22%20x2%3D%22353%22%20y2%3D%22790%22%20stroke%3D%22rgba%2820%2C30%2C70%2C0.045%29%22%20stroke-width%3D%227%22/%3E%0A%3Cline%20x1%3D%22586%22%20y1%3D%2290%22%20x2%3D%22586%22%20y2%3D%22790%22%20stroke%3D%22rgba%2820%2C30%2C70%2C0.045%29%22%20stroke-width%3D%227%22/%3E%0A%3Cpath%20d%3D%22M%20170%20210%20L%20420%2090%22%20stroke%3D%22rgba%2863%2C99%2C255%2C0.06%29%22%20stroke-width%3D%2246%22%20stroke-linecap%3D%22round%22/%3E%0A%3Cpath%20d%3D%22M%20260%20340%20L%20470%20150%22%20stroke%3D%22rgba%2814%2C156%2C176%2C0.05%29%22%20stroke-width%3D%2230%22%20stroke-linecap%3D%22round%22/%3E%0A%3Cpath%20d%3D%22M%20210%20700%20Q%20250%20640%20225%20580%20Q%20205%20535%20235%20490%22%20stroke%3D%22rgba%2863%2C99%2C255%2C0.09%29%22%20stroke-width%3D%227%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22/%3E%0A%3Ccircle%20cx%3D%22235%22%20cy%3D%22490%22%20r%3D%229%22%20fill%3D%22rgba%2863%2C99%2C255%2C0.09%29%22/%3E%0A%3Cpath%20d%3D%22M%20700%20730%20Q%20735%20675%20715%20615%22%20stroke%3D%22rgba%2814%2C156%2C176%2C0.09%29%22%20stroke-width%3D%227%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22/%3E%0A%3Ccircle%20cx%3D%22715%22%20cy%3D%22615%22%20r%3D%228%22%20fill%3D%22rgba%2814%2C156%2C176%2C0.09%29%22/%3E%0A%3C/g%3E%0A%3C/svg%3E");
+    background-position: 0 0, 0 0, 0 0, 0 0, 0 0, right -80px bottom -60px;
+    background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat, no-repeat;
+    background-size: auto, auto, auto, auto, auto, min(720px, 90vw);
+    background-attachment:fixed;
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    font-weight:500;
+    line-height:1.5;
+  }
+  h1,h2,h3{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    margin:0;
+    color:var(--text);
+  }
+
+  #screen-identify{
+    display:flex;
+    min-height:100vh;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:32px 24px;
+    position:relative;
+    overflow:hidden;
+  }
+  .identify-box{ width:100%; max-width:300px; position:relative; z-index:1; }
+  .identify-box select, .identify-box input{ margin-bottom:12px; }
+  .identify-box .cta-btn{ width:100%; }
+
+  #screen-home{
+    display:none;
+    min-height:100vh;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:32px 24px;
+    position:relative;
+    overflow:hidden;
+  }
+  .home-mark-wrap{
+    position:relative;
+    width:96px; height:96px;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:30px;
+  }
+  .home-mark-wrap::before{
+    content:"";
+    position:absolute; inset:-46px;
+    background:radial-gradient(circle, rgba(63,99,255,0.22), rgba(14,156,176,0.12) 45%, transparent 72%);
+    filter:blur(18px);
+    z-index:0;
+  }
+  .home-mark-glass{
+    position:relative; z-index:1;
+    width:100%; height:100%;
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+    border:1px solid rgba(20,30,70,0.10);
+    border-radius:26px;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 12px 30px rgba(20,30,70,0.14);
+  }
+  .home-mark{ color:var(--accent-cyan); }
+  .home-name{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:48px;
+    letter-spacing:-0.5px;
+    margin-bottom:14px;
+    background:linear-gradient(135deg, #14171F 0%, #3F63FF 55%, #0E9CB0 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .home-eyebrow{
+    font-size:15px; font-weight:700; color:var(--text);
+    max-width:360px; margin:0 0 8px; letter-spacing:0.2px;
+  }
+  .home-tag{
+    color:var(--text-mid);
+    font-size:13.5px;
+    font-weight:500;
+    max-width:320px;
+    margin:0 0 36px;
+  }
+  .cta-btn{
+    position:relative; z-index:1;
+    background:var(--accent-grad);
+    color:#fff;
+    border:none;
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    padding:16px 38px;
+    border-radius:12px;
+    cursor:pointer;
+    letter-spacing:0.2px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.35) inset, 0 10px 26px rgba(63,99,255,0.35);
+  }
+  .cta-btn:hover{ filter:brightness(1.08); }
+  .home-foot{ position:relative; z-index:1; margin-top:44px; font-size:12px; color:var(--text-mid); letter-spacing:1px; }
+
+  #screen-app{ display:none; position:relative; }
+
+  #screen-typeclient{
+    display:none; min-height:100vh; flex-direction:column;
+  }
+  .typeclient-wrap{
+    flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:24px 24px 60px;
+  }
+  .typeclient-grid{
+    display:flex; flex-direction:column; gap:16px; width:100%; max-width:420px;
+  }
+  .typeclient-card{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px;
+    height:130px; border-radius:16px; cursor:pointer; padding:0;
+    background:var(--glass); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border:1px solid var(--glass-border);
+    box-shadow:0 1px 0 rgba(255,255,255,0.5) inset, 0 8px 24px rgba(20,30,70,0.10);
+  }
+  .typeclient-card .icon{ width:30px; height:30px; background-color:var(--accent); }
+  .typeclient-card span:last-child{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16px; color:var(--text); }
+  .typeclient-card:hover{ border-color:var(--accent); }
+
+  .app-bg-video{
+    position:fixed; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2;
+    opacity:0; transition:opacity 0.5s ease;
+  }
+  .app-bg-video.visible{ opacity:1; }
+  .app-bg-overlay{
+    position:fixed; inset:0; z-index:-1; background:rgba(243,245,250,0.88);
+  }
+  #screen-settings{ display:none; }
+  .topbar{
+    display:flex; align-items:center; gap:14px;
+    max-width:1040px; margin:0 auto; padding:20px 24px 0;
+  }
+  .back-btn{
+    background:var(--surface); border:1px solid var(--line); color:var(--text);
+    width:36px; height:36px; border-radius:8px; cursor:pointer; font-size:16px;
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+  }
+  .back-btn:hover{ border-color:var(--accent); }
+  .topbar-name{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:17px; letter-spacing:0.3px; }
+
+  header{ max-width:1040px; margin:0 auto; padding:22px 24px 20px; }
+  header h1{ font-size:24px; margin-bottom:8px; }
+  header p{ color:var(--text-mid); font-size:14px; font-weight:500; max-width:460px; margin:0; }
+  .progress-note{ color:var(--accent-bright) !important; font-size:12.5px !important; font-weight:700 !important; margin-top:8px !important; }
+  main{
+    max-width:1040px; margin:0 auto; padding:0 24px 120px;
+    display:grid; grid-template-columns:1.3fr 1fr; gap:24px; align-items:start;
+  }
+  @media (max-width:820px){ main{grid-template-columns:1fr;} }
+  .card{
+    background:var(--glass);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border:1px solid var(--glass-border);
+    border-radius:14px; padding:22px; margin-bottom:18px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.05) inset, 0 8px 24px rgba(0,0,0,0.25);
+  }
+  .card-note{ font-size:12.5px; font-weight:500; color:var(--text-mid); margin:-6px 0 16px; line-height:1.5; }
+  .more-toggle{
+    background:none; border:none; color:var(--accent-bright); font-family:'Inter',sans-serif;
+    font-weight:700; font-size:13px; cursor:pointer; padding:6px 0 10px; text-align:left; width:100%;
+  }
+  .more-toggle:hover{ text-decoration:underline; }
+  .more-section{ display:none; }
+  .more-section.open{ display:block; }
+  .subhead{ font-size:12px; font-weight:700; letter-spacing:2px; color:var(--accent-bright); margin:18px 0 10px; }
+  .subhead:first-child{ margin-top:0; }
+  .card h2{ font-size:16px; margin-bottom:6px; display:flex; align-items:center; gap:8px; }
+  .icon{
+    display:inline-block; width:1em; height:1em; vertical-align:-0.15em;
+    background-color:currentColor;
+    -webkit-mask-size:contain; mask-size:contain;
+    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+    -webkit-mask-position:center; mask-position:center;
+  }
+  .icon-settings{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%224%22%20y1%3D%226%22%20x2%3D%2220%22%20y2%3D%226%22/%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%226%22%20r%3D%222%22%20fill%3D%22white%22/%3E%3Cline%20x1%3D%224%22%20y1%3D%2212%22%20x2%3D%2220%22%20y2%3D%2212%22/%3E%3Ccircle%20cx%3D%228%22%20cy%3D%2212%22%20r%3D%222%22%20fill%3D%22white%22/%3E%3Cline%20x1%3D%224%22%20y1%3D%2218%22%20x2%3D%2220%22%20y2%3D%2218%22/%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2218%22%20r%3D%222%22%20fill%3D%22white%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%224%22%20y1%3D%226%22%20x2%3D%2220%22%20y2%3D%226%22/%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%226%22%20r%3D%222%22%20fill%3D%22white%22/%3E%3Cline%20x1%3D%224%22%20y1%3D%2212%22%20x2%3D%2220%22%20y2%3D%2212%22/%3E%3Ccircle%20cx%3D%228%22%20cy%3D%2212%22%20r%3D%222%22%20fill%3D%22white%22/%3E%3Cline%20x1%3D%224%22%20y1%3D%2218%22%20x2%3D%2220%22%20y2%3D%2218%22/%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2218%22%20r%3D%222%22%20fill%3D%22white%22/%3E%3C/svg%3E"); }
+  .icon-pin{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%2021s-7-7.5-7-12a7%207%200%200%201%2014%200c0%204.5-7%2012-7%2012z%22/%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%229%22%20r%3D%222.4%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%2021s-7-7.5-7-12a7%207%200%200%201%2014%200c0%204.5-7%2012-7%2012z%22/%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%229%22%20r%3D%222.4%22/%3E%3C/svg%3E"); }
+  .icon-alert{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203%202%2020h20L12%203z%22/%3E%3Cline%20x1%3D%2212%22%20y1%3D%229.5%22%20x2%3D%2212%22%20y2%3D%2214%22/%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2217%22%20r%3D%220.6%22%20fill%3D%22black%22%20stroke%3D%22none%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203%202%2020h20L12%203z%22/%3E%3Cline%20x1%3D%2212%22%20y1%3D%229.5%22%20x2%3D%2212%22%20y2%3D%2214%22/%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2217%22%20r%3D%220.6%22%20fill%3D%22black%22%20stroke%3D%22none%22/%3E%3C/svg%3E"); }
+  .icon-mail{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%222%22%20y%3D%225%22%20width%3D%2220%22%20height%3D%2214%22%20rx%3D%222%22/%3E%3Cpath%20d%3D%22M2.5%207l9.5%206%209.5-6%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%222%22%20y%3D%225%22%20width%3D%2220%22%20height%3D%2214%22%20rx%3D%222%22/%3E%3Cpath%20d%3D%22M2.5%207l9.5%206%209.5-6%22/%3E%3C/svg%3E"); }
+  .icon-printer{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M6%209V3h12v6%22/%3E%3Crect%20x%3D%224%22%20y%3D%229%22%20width%3D%2216%22%20height%3D%228%22%20rx%3D%221%22/%3E%3Cpath%20d%3D%22M6%2017v4h12v-4%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M6%209V3h12v6%22/%3E%3Crect%20x%3D%224%22%20y%3D%229%22%20width%3D%2216%22%20height%3D%228%22%20rx%3D%221%22/%3E%3Cpath%20d%3D%22M6%2017v4h12v-4%22/%3E%3C/svg%3E"); }
+  .icon-download{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203v12%22/%3E%3Cpath%20d%3D%22M7%2010l5%205%205-5%22/%3E%3Cpath%20d%3D%22M4%2020h16%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203v12%22/%3E%3Cpath%20d%3D%22M7%2010l5%205%205-5%22/%3E%3Cpath%20d%3D%22M4%2020h16%22/%3E%3C/svg%3E"); }
+  .icon-trash{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%207h16%22/%3E%3Cpath%20d%3D%22M9%207V4h6v3%22/%3E%3Cpath%20d%3D%22M6%207l1%2013h10l1-13%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%207h16%22/%3E%3Cpath%20d%3D%22M9%207V4h6v3%22/%3E%3Cpath%20d%3D%22M6%207l1%2013h10l1-13%22/%3E%3C/svg%3E"); }
+  .icon-building{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%224%22%20y%3D%223%22%20width%3D%229%22%20height%3D%2218%22/%3E%3Crect%20x%3D%2213%22%20y%3D%229%22%20width%3D%227%22%20height%3D%2212%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%224%22%20y%3D%223%22%20width%3D%229%22%20height%3D%2218%22/%3E%3Crect%20x%3D%2213%22%20y%3D%229%22%20width%3D%227%22%20height%3D%2212%22/%3E%3C/svg%3E"); }
+  .icon-upload{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%2020V9%22/%3E%3Cpath%20d%3D%22M7%2014l5-5%205%205%22/%3E%3Cpath%20d%3D%22M4%2020h16%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%2020V9%22/%3E%3Cpath%20d%3D%22M7%2014l5-5%205%205%22/%3E%3Cpath%20d%3D%22M4%2020h16%22/%3E%3C/svg%3E"); }
+  .icon-save{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%204h11l3%203v13H5z%22/%3E%3Cpath%20d%3D%22M8%204v6h8V4%22/%3E%3Crect%20x%3D%228%22%20y%3D%2214%22%20width%3D%228%22%20height%3D%226%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%204h11l3%203v13H5z%22/%3E%3Cpath%20d%3D%22M8%204v6h8V4%22/%3E%3Crect%20x%3D%228%22%20y%3D%2214%22%20width%3D%228%22%20height%3D%226%22/%3E%3C/svg%3E"); }
+  .icon-user{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%224%22/%3E%3Cpath%20d%3D%22M4%2021c0-4%204-7%208-7s8%203%208%207%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%224%22/%3E%3Cpath%20d%3D%22M4%2021c0-4%204-7%208-7s8%203%208%207%22/%3E%3C/svg%3E"); }
+  .icon-check{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2012l6%206L20%206%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2012l6%206L20%206%22/%3E%3C/svg%3E"); }
+  .icon-cross{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%2218%22%20height%3D%2218%22%20rx%3D%223%22/%3E%3Cline%20x1%3D%2212%22%20y1%3D%223%22%20x2%3D%2212%22%20y2%3D%2221%22/%3E%3Cline%20x1%3D%223%22%20y1%3D%2212%22%20x2%3D%2221%22%20y2%3D%2212%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%2218%22%20height%3D%2218%22%20rx%3D%223%22/%3E%3Cline%20x1%3D%2212%22%20y1%3D%223%22%20x2%3D%2212%22%20y2%3D%2221%22/%3E%3Cline%20x1%3D%223%22%20y1%3D%2212%22%20x2%3D%2221%22%20y2%3D%2212%22/%3E%3C/svg%3E"); }
+  .icon-chevronleft{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M15%204l-8%208%208%208%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M15%204l-8%208%208%208%22/%3E%3C/svg%3E"); }
+  .icon-refresh{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%2012a9%209%200%200%201%2015-6.7L21%208%22/%3E%3Cpath%20d%3D%22M21%203v5h-5%22/%3E%3Cpath%20d%3D%22M21%2012a9%209%200%200%201-15%206.7L3%2016%22/%3E%3Cpath%20d%3D%22M8%2021H3v-5%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%2012a9%209%200%200%201%2015-6.7L21%208%22/%3E%3Cpath%20d%3D%22M21%203v5h-5%22/%3E%3Cpath%20d%3D%22M21%2012a9%209%200%200%201-15%206.7L3%2016%22/%3E%3Cpath%20d%3D%22M8%2021H3v-5%22/%3E%3C/svg%3E"); }
+  .card h2::before{ content:""; display:inline-block; width:14px; height:14px; background-color:var(--accent); -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%2218%22%20height%3D%2218%22%20rx%3D%223%22/%3E%3Cline%20x1%3D%2212%22%20y1%3D%223%22%20x2%3D%2212%22%20y2%3D%2221%22/%3E%3Cline%20x1%3D%223%22%20y1%3D%2212%22%20x2%3D%2221%22%20y2%3D%2212%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%2218%22%20height%3D%2218%22%20rx%3D%223%22/%3E%3Cline%20x1%3D%2212%22%20y1%3D%223%22%20x2%3D%2212%22%20y2%3D%2221%22/%3E%3Cline%20x1%3D%223%22%20y1%3D%2212%22%20x2%3D%2221%22%20y2%3D%2212%22/%3E%3C/svg%3E"); -webkit-mask-size:contain; mask-size:contain; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; vertical-align:-2px; margin-right:2px; }
+  .field{ margin-bottom:14px; }
+  .field label{ display:block; font-size:13px; font-weight:600; color:var(--text-mid); margin-bottom:5px; }
+  .field .hint{ font-size:12px; font-weight:500; color:var(--text-mid); opacity:0.85; margin-top:3px; }
+  input[type=text], input[type=number], select{
+    width:100%; padding:10px 11px; border:1px solid var(--line); border-radius:7px;
+    background:var(--surface-2); color:var(--text); font-family:'Inter',sans-serif;
+    font-weight:600; font-size:14px;
+  }
+  input:focus, select:focus, textarea:focus{ outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent); }
+  button:focus-visible, a:focus-visible, .back-btn:focus-visible, label[for]:focus-within{
+    outline:2px solid var(--accent); outline-offset:2px; border-radius:6px;
+  }
+  button:focus:not(:focus-visible){ outline:none; }
+  .row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .row4{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  fieldset{ border:none; padding:0; margin:0 0 14px; }
+  fieldset legend{ font-size:13px; font-weight:600; color:var(--text-mid); margin-bottom:6px; padding:0; }
+  .radio-group, .check-group{ display:flex; flex-direction:column; gap:8px; }
+  .radio-group label, .check-group label{
+    display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:var(--text); cursor:pointer;
+  }
+  input[type=radio], input[type=checkbox]{ accent-color:var(--accent); width:15px; height:15px; }
+
+  .item-row{
+    display:flex; flex-wrap:wrap; gap:10px 12px; align-items:flex-end;
+    margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--line);
+  }
+  .item-row:last-child{ border-bottom:none; margin-bottom:0; padding-bottom:0; }
+  .item-row .field{ flex:1 1 130px; margin-bottom:0; }
+  .item-row .check-field{ flex:0 0 auto; display:flex; align-items:center; gap:7px; padding-bottom:9px; }
+  .item-row .check-field label{ font-size:12.5px; font-weight:600; color:var(--text-mid); display:flex; align-items:center; gap:6px; white-space:nowrap; }
+
+  details{
+    background:var(--glass);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border:1px solid var(--glass-border); border-radius:14px; padding:18px 22px;
+  }
+  details summary{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; cursor:pointer; color:var(--text); }
+  details[open] summary{ margin-bottom:14px; }
+  .settings-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px 16px; margin-top:10px; }
+  .settings-grid .field label{ font-size:12.5px; }
+
+  .devis-panel{
+    position:sticky; top:20px;
+    background:linear-gradient(var(--glass), var(--glass)) padding-box,
+               linear-gradient(160deg, rgba(63,99,255,0.55), rgba(14,156,176,0.35)) border-box;
+    backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+    border:1px solid transparent;
+    border-radius:16px; padding:26px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.5) inset, 0 16px 40px rgba(20,30,70,0.12);
+  }
+  .devis-panel h2{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px; color:var(--text); margin-bottom:4px; }
+  .devis-panel .client-line{ font-size:12.5px; font-weight:600; color:var(--text-mid); margin-bottom:18px; }
+  .line-item{
+    display:flex; justify-content:space-between; gap:10px; font-size:13px; font-weight:600;
+    padding:7px 0; border-bottom:1px solid var(--line);
+  }
+  .line-item span:first-child{ color:var(--text-mid); }
+  .line-item span:last-child{ white-space:nowrap; color:var(--text); }
+  .line-item.discount span:last-child{ color:#16A34A; }
+  #freqTotals{ margin-top:18px; padding-top:16px; border-top:1px solid var(--line); }
+  .freq-row{ display:flex; justify-content:space-between; align-items:baseline; padding:9px 0; }
+  .freq-row + .freq-row, .freq-split + .freq-row{ border-top:1px dashed var(--line); }
+  .freq-row .flabel{ font-size:12.5px; font-weight:700; color:var(--text-mid); letter-spacing:0.4px; }
+  .freq-row .fvalue{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px;
+    background:linear-gradient(135deg, #2A45D6, #0E9CB0);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .freq-split{ font-size:11px; font-weight:600; color:var(--text-mid); margin:-5px 0 8px; padding-left:2px; }
+  .calc-btn{
+    display:block; width:100%; background:var(--accent-grad); border:none; color:#fff;
+    font-family:'Inter',sans-serif; font-weight:700; font-size:15px; letter-spacing:0.3px;
+    padding:15px; border-radius:10px; cursor:pointer; margin-top:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.3) inset, 0 8px 22px rgba(63,99,255,0.3);
+  }
+  .calc-btn:hover{ filter:brightness(1.08); }
+  .print-btn{
+    margin-top:20px; width:100%; background:transparent; border:1px solid var(--accent-bright); color:var(--accent-bright);
+    font-family:'Inter',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.3px;
+    padding:12px; border-radius:7px; cursor:pointer;
+  }
+  .print-btn:hover{ background:rgba(124,151,255,0.12); }
+  .btn-row{ display:flex; gap:10px; margin-top:4px; }
+  .btn-row .calc-btn{ margin-top:0; }
+  .secondary-btn{
+    display:block; background:var(--surface-2); border:1px solid var(--line); color:var(--text);
+    font-family:'Inter',sans-serif; font-weight:700; font-size:14px; letter-spacing:0.2px;
+    padding:15px; border-radius:9px; cursor:pointer; flex:0 0 auto;
+  }
+  .secondary-btn:hover{ border-color:var(--accent); }
+
+  .bottom-bar{
+    display:none;
+    position:fixed; left:0; right:0; bottom:0; z-index:60;
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+    border-top:1px solid var(--glass-border);
+    padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  }
+  .bottom-bar.visible{ display:block; }
+  .bottom-bar-inner{ max-width:1040px; margin:0 auto; display:flex; gap:10px; }
+  .bottom-bar-inner .secondary-btn{ flex:0 0 auto; }
+  .bottom-bar-inner .calc-btn{ flex:1; margin-top:0; }
+
+  .qty-stepper{
+    display:flex; align-items:stretch; width:100%;
+    border:1px solid var(--line); border-radius:7px; overflow:hidden;
+    background:var(--surface-2);
+  }
+  .qty-stepper input[type=number]{
+    border:none !important; background:transparent !important; text-align:center;
+    width:100%; padding:10px 4px !important; -moz-appearance:textfield;
+  }
+  .qty-stepper input[type=number]:focus{ outline:none !important; }
+  .qty-stepper input[type=number]::-webkit-outer-spin-button,
+  .qty-stepper input[type=number]::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
+  .qty-btn{
+    background:transparent; border:none; color:var(--accent-bright);
+    font-size:19px; font-weight:700; width:42px; flex:0 0 42px;
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+  }
+  .qty-btn:hover{ background:rgba(124,151,255,0.14); }
+  .qty-btn:active{ background:rgba(124,151,255,0.26); }
+
+  .stale-badge{
+    background:rgba(255,138,128,0.12); border:1px solid rgba(255,138,128,0.4); color:#D64545;
+    font-size:11.5px; font-weight:700; padding:9px 12px; border-radius:8px; margin-bottom:14px; text-align:center;
+  }
+  .devis-panel.stale .line-item, .devis-panel.stale .freq-row, .devis-panel.stale .freq-split{ opacity:0.45; }
+
+  #toastContainer{
+    position:fixed; top:16px; left:50%; transform:translateX(-50%);
+    z-index:100; display:flex; flex-direction:column; gap:8px; align-items:center;
+    pointer-events:none; width:100%; padding:0 16px;
+  }
+  .toast{
+    background:var(--surface); border:1px solid var(--line); color:var(--text);
+    font-size:13px; font-weight:600; padding:11px 18px; border-radius:10px;
+    box-shadow:0 8px 24px rgba(20,30,70,0.18);
+    display:flex; align-items:center; gap:8px;
+    opacity:0; transform:translateY(-10px);
+    transition:opacity 0.25s ease, transform 0.25s ease;
+    max-width:420px;
+  }
+  .toast.show{ opacity:1; transform:translateY(0); }
+  .toast.success{ border-color:rgba(22,163,74,0.35); }
+  .toast.success .icon{ color:#16A34A; }
+  .toast.error{ border-color:rgba(214,69,69,0.35); }
+  .toast.error .icon{ color:#D64545; }
+  .devis-meta{ font-size:11.5px; font-weight:600; color:var(--text-mid); margin-bottom:10px; line-height:1.6; }
+  .devis-meta b{ color:var(--text); }
+  .action-row{ display:flex; flex-direction:column; gap:8px; margin-top:20px; }
+  .signature-box{ margin-top:20px; padding-top:18px; border-top:1px solid var(--line); }
+  .mentions-block{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--line); font-size:11px; font-weight:500; color:var(--text-mid); line-height:1.6; }
+  .signature-box canvas{
+    width:100%; height:110px; background:var(--surface-2); border:1px dashed var(--line);
+    border-radius:8px; touch-action:none; cursor:crosshair;
+  }
+  .sig-row{ display:flex; gap:8px; margin-top:8px; }
+  .sig-row button{ flex:1; }
+  .sig-status{ font-size:11.5px; font-weight:600; color:#16A34A; margin-top:8px; }
+  .history-item{
+    display:flex; justify-content:space-between; align-items:center; gap:10px;
+    padding:10px 0; border-bottom:1px solid var(--line); font-size:13px; font-weight:600;
+  }
+  .history-item:last-child{ border-bottom:none; }
+  .history-item .hmeta{ color:var(--text-mid); font-size:11.5px; font-weight:500; }
+  .history-item button{
+    background:var(--surface-2); border:1px solid var(--line); color:var(--accent-bright);
+    font-weight:700; font-size:12px; padding:7px 12px; border-radius:6px; cursor:pointer; flex:0 0 auto;
+  }
+  .history-item button:hover{ border-color:var(--accent); }
+  .logo-preview{ max-height:40px; max-width:140px; margin-top:8px; border-radius:4px; }
+  select#carnetClients{ margin-bottom:14px; }
+  .icon-inbox{ -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2012h4l2%203h4l2-3h4%22/%3E%3Cpath%20d%3D%22M4%2012l1.5-7h13L20%2012%22/%3E%3Cpath%20d%3D%22M4%2012v6a1%201%200%200%200%201%201h14a1%201%200%200%200%201-1v-6%22/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2012h4l2%203h4l2-3h4%22/%3E%3Cpath%20d%3D%22M4%2012l1.5-7h13L20%2012%22/%3E%3Cpath%20d%3D%22M4%2012v6a1%201%200%200%200%201%201h14a1%201%200%200%200%201-1v-6%22/%3E%3C/svg%3E"); }
+  .empty-note{ font-size:12.5px; font-weight:600; color:var(--text-mid); }
+  .empty-state{
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    gap:8px; padding:20px 10px; color:var(--text-mid);
+  }
+  .empty-state .icon{ width:26px; height:26px; opacity:0.4; }
+  .empty-state span{ font-size:12.5px; font-weight:600; }
+  footer{ text-align:center; padding:30px 24px 50px; font-size:12px; font-weight:600; color:var(--text-mid); }
+  footer .sep{ color:var(--accent); margin:0 8px; }
+
+  @media print{
+    #screen-home{display:none !important;}
+    #screen-settings{display:none !important;}
+    #screen-typeclient{display:none !important;}
+    #screen-app{display:block !important;}
+    body{background:#fff; color:#0B0C0E; background-image:none;}
+    .topbar, header p, .card, details, .print-btn, footer, .action-row, .sig-row, #sigCanvas, .secondary-btn, .bottom-bar, .stale-badge, .app-bg-video, .app-bg-overlay{display:none !important;}
+    header{padding:0 0 20px;}
+    main{display:block; padding:0;}
+    .devis-panel{position:static; border-radius:0; padding:0; background:#fff !important; border:none; box-shadow:none; backdrop-filter:none;}
+    .devis-panel h2{color:#0B0C0E;}
+    .devis-meta{color:#555;}
+    .devis-meta b{color:#0B0C0E;}
+    .line-item{border-bottom:1px solid #DDD;}
+    .line-item span:first-child{color:#555;}
+    .line-item span:last-child{color:#0B0C0E;}
+    #freqTotals{border-top:1px solid #DDD;}
+    .freq-row .flabel{color:#555;}
+    .freq-row .fvalue{background:none; -webkit-background-clip:initial; background-clip:initial; color:#0B0C0E !important;}
+    .freq-split{color:#555;}
+    .signature-box{border-top:1px solid #DDD;}
+    .mentions-block{border-top:1px dashed #DDD; color:#555;}
+    .sig-status{color:#0B0C0E !important; font-size:12px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="toastContainer" aria-live="polite"></div>
+
+<div id="screen-identify">
+  <div class="home-mark-wrap">
+    <div class="home-mark-glass">
+      <svg class="home-mark" width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="4" stroke="currentColor" stroke-width="2.2"/>
+        <line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" stroke-width="2.2"/>
+        <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="2.2"/>
+      </svg>
+    </div>
+  </div>
+  <p class="home-eyebrow" style="margin-bottom:22px;">Login</p>
+  <div class="identify-box">
+    <select id="prestataireSelect" onchange="document.getElementById('prestataireNouveau').value='';">
+      <option value="">— Choisir un prestataire —</option>
+    </select>
+    <input type="text" id="prestataireNouveau" placeholder="Ou saisir un nouveau nom">
+    <button class="cta-btn" onclick="validerPrestataire()">Continuer →</button>
+  </div>
+  <p class="hint" style="max-width:300px; margin-top:18px; position:relative; z-index:1;">Simple identification locale (non sécurisée) pour savoir qui a préparé chaque devis — ce n'est pas un mot de passe.</p>
+  <p class="hint" id="identifyStatus" style="max-width:300px; margin-top:10px; color:#D64545; position:relative; z-index:1;"></p>
+</div>
+
+<div id="screen-home">
+  <video class="app-bg-video visible" autoplay muted loop playsinline poster="bg-particulier-poster.jpg">
+    <source src="bg-particulier.mp4" type="video/mp4">
+  </video>
+  <div class="app-bg-overlay"></div>
+  <div class="home-mark-wrap">
+    <div class="home-mark-glass">
+      <svg class="home-mark" width="44" height="44" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="4" stroke="currentColor" stroke-width="2.2"/>
+        <line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" stroke-width="2.2"/>
+        <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="2.2"/>
+      </svg>
+    </div>
+  </div>
+  <div class="home-name" id="homeName">Vitrio</div>
+  <p class="home-eyebrow">Autant de clarté dans vos devis que dans vos vitres.</p>
+  <p class="home-tag">Calculateur pour les professionnels de la vitrerie et de la menuiserie.</p>
+  <button class="cta-btn" onclick="allerVersChoixType()">+ Nouveau devis</button>
+  <div class="home-foot"><span class="icon icon-cross"></span> VITRERIE &amp; MENUISERIE</div>
+</div>
+
+<div id="screen-typeclient">
+  <div class="topbar">
+    <button class="back-btn" onclick="basculerEcran('screen-typeclient','screen-home','flex')" aria-label="Retour"><span class="icon icon-chevronleft"></span></button>
+    <span class="topbar-name">Vitrio</span>
+  </div>
+  <div class="typeclient-wrap">
+    <p class="home-eyebrow" style="margin-bottom:20px;">Quel type de client ?</p>
+    <div class="typeclient-grid">
+      <button type="button" class="typeclient-card" onclick="choisirTypeClient('particulier')">
+        <span class="icon icon-user"></span>
+        <span>Client particulier</span>
+      </button>
+      <button type="button" class="typeclient-card" onclick="choisirTypeClient('professionnel')">
+        <span class="icon icon-building"></span>
+        <span>Client professionnel</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="screen-app">
+  <div class="topbar">
+    <button class="back-btn" onclick="basculerEcran('screen-app','screen-typeclient','flex')" aria-label="Retour"><span class="icon icon-chevronleft"></span></button>
+    <span class="topbar-name" id="topbarName">Vitrio</span>
+    <div style="margin-left:auto; display:flex; align-items:center; gap:10px;">
+      <span id="prestataireBadge" style="font-size:11px; font-weight:600; color:var(--text-mid); cursor:pointer;" onclick="changerPrestataire()"></span>
+      <button class="back-btn" onclick="ouvrirReglages()" aria-label="Réglages"><span class="icon icon-settings"></span></button>
+    </div>
+  </div>
+
+  <header>
+    <h1>Calculateur de devis</h1>
+    <p>Renseignez la prestation, ajustez vos tarifs si besoin, puis calculez le devis en un clic.</p>
+    <p class="progress-note" id="progressNote"></p>
+  </header>
+
+  <main>
+    <div>
+      <div id="quoteForm">
+      <div class="card">
+        <h2>Client</h2>
+        <div class="field">
+          <label for="carnetClients">Client existant</label>
+          <select id="carnetClients" onchange="chargerClient()">
+            <option value="">— Nouveau client —</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="clientNom">Nom / entreprise (optionnel)</label>
+          <input type="text" id="clientNom" placeholder="Nom du client">
+        </div>
+        <div class="row">
+          <fieldset>
+            <legend>Type de client</legend>
+            <div class="radio-group">
+              <label><input type="radio" id="typeClientParticulier" name="typeClient" value="particulier" checked> Particulier</label>
+              <label><input type="radio" id="typeClientPro" name="typeClient" value="professionnel"> Professionnel</label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="secteur">Ville / secteur d'intervention</label>
+            <input type="text" id="secteur" placeholder="Ex. Lyon, Bordeaux...">
+          </div>
+        </div>
+        <div class="field">
+          <label for="adresseClient">Adresse du client</label>
+          <input type="text" id="adresseClient" placeholder="Ex. 15 rue des Lilas, 69001 Lyon">
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="distanceKm">Distance depuis votre base <span class="hint">— km, aller simple</span></label>
+            <input type="number" id="distanceKm" min="0" step="0.5" value="0">
+          </div>
+          <div class="field">
+            <label style="margin-top:22px; display:flex; align-items:center; gap:8px;"><input type="checkbox" id="allerRetour"> Compter l'aller-retour (distance × 2)</label>
+          </div>
+        </div>
+        <button type="button" class="print-btn" style="margin-top:0; margin-bottom:10px;" onclick="calculerTrajet()"><span class="icon icon-pin"></span> Calculer le trajet automatiquement</button>
+        <p class="hint" id="trajetStatus" style="margin-top:-4px; margin-bottom:14px;">Renseignez l'adresse de votre entreprise dans les paramètres tarifaires, puis l'adresse du client ci-dessus.</p>
+        <div class="field" id="creditImpotField">
+          <label><input type="checkbox" id="creditImpot"> Avance immédiate de crédit d'impôt (le client règle 50% aujourd'hui, le solde via l'avance Urssaf)</label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Menuiseries extérieures à nettoyer</h2>
+        <p class="card-note">Pour les fenêtres, baies et portes-fenêtres : choisissez le type d'ouverture et cochez « en hauteur » si le vitrage est situé à 3-4 m (le prix est doublé).</p>
+
+        <p class="subhead">FENÊTRES CLASSIQUES</p>
+        <div class="item-row">
+          <div class="field">
+            <label for="qtyFenetre1V">1 vantail</label>
+            <input type="number" id="qtyFenetre1V" min="0" value="0">
+          </div>
+          <div class="field">
+            <label for="ouvFenetre1V">Ouverture</label>
+            <select id="ouvFenetre1V">
+              <option value="battante" selected>Battante</option>
+              <option value="oscillo">Oscillo-battante</option>
+              <option value="coulissante">Coulissante</option>
+              <option value="basculante">Basculante</option>
+              <option value="pivotante">Pivotante</option>
+              <option value="galandage">À galandage</option>
+              <option value="pliante">Pliante / accordéon</option>
+              <option value="fixe">Fixe</option>
+            </select>
+          </div>
+          <div class="check-field"><label><input type="checkbox" id="hautFenetre1V"> En hauteur</label></div>
+        </div>
+        <div class="item-row">
+          <div class="field">
+            <label for="qtyFenetre2V">2 vantaux</label>
+            <input type="number" id="qtyFenetre2V" min="0" value="0">
+          </div>
+          <div class="field">
+            <label for="ouvFenetre2V">Ouverture</label>
+            <select id="ouvFenetre2V">
+              <option value="battante" selected>Battante</option>
+              <option value="oscillo">Oscillo-battante</option>
+              <option value="coulissante">Coulissante</option>
+              <option value="basculante">Basculante</option>
+              <option value="pivotante">Pivotante</option>
+              <option value="galandage">À galandage</option>
+              <option value="pliante">Pliante / accordéon</option>
+              <option value="fixe">Fixe</option>
+            </select>
+          </div>
+          <div class="check-field"><label><input type="checkbox" id="hautFenetre2V"> En hauteur</label></div>
+        </div>
+        <div class="item-row">
+          <div class="field">
+            <label for="qtyFenetreTriangle">Fenêtre triangle</label>
+            <input type="number" id="qtyFenetreTriangle" min="0" value="0">
+          </div>
+          <div class="field">
+            <label for="ouvFenetreTriangle">Ouverture</label>
+            <select id="ouvFenetreTriangle">
+              <option value="battante" selected>Battante</option>
+              <option value="oscillo">Oscillo-battante</option>
+              <option value="fixe">Fixe</option>
+              <option value="pivotante">Pivotante</option>
+            </select>
+          </div>
+          <div class="check-field"><label><input type="checkbox" id="hautFenetreTriangle"> En hauteur</label></div>
+        </div>
+
+        <p class="subhead">BAIES VITRÉES &amp; PORTES-FENÊTRES</p>
+        <div class="item-row">
+          <div class="field">
+            <label for="qtyBaieSimple">Baie vitrée simple</label>
+            <input type="number" id="qtyBaieSimple" min="0" value="0">
+          </div>
+          <div class="field">
+            <label for="ouvBaieSimple">Ouverture</label>
+            <select id="ouvBaieSimple">
+              <option value="battante">Battante</option>
+              <option value="oscillo">Oscillo-battante</option>
+              <option value="coulissante" selected>Coulissante</option>
+              <option value="galandage">À galandage</option>
+              <option value="pliante">Pliante / accordéon</option>
+              <option value="fixe">Fixe</option>
+            </select>
+          </div>
+          <div class="check-field"><label><input type="checkbox" id="hautBaieSimple"> En hauteur</label></div>
+        </div>
+        <div class="item-row">
+          <div class="field">
+            <label for="qtyBaieDouble">Baie vitrée double</label>
+            <input type="number" id="qtyBaieDouble" min="0" value="0">
+          </div>
+          <div class="field">
+            <label for="ouvBaieDouble">Ouverture</label>
+            <select id="ouvBaieDouble">
+              <option value="battante">Battante</option>
+              <option value="oscillo">Oscillo-battante</option>
+              <option value="coulissante" selected>Coulissante</option>
+              <option value="galandage">À galandage</option>
+              <option value="pliante">Pliante / accordéon</option>
+              <option value="fixe">Fixe</option>
+            </select>
+          </div>
+          <div class="check-field"><label><input type="checkbox" id="hautBaieDouble"> En hauteur</label></div>
+        </div>
+        <div class="item-row">
+          <div class="field">
+            <label for="qtyPFSimple">Porte-fenêtre simple</label>
+            <input type="number" id="qtyPFSimple" min="0" value="0">
+          </div>
+          <div class="field">
+            <label for="ouvPFSimple">Ouverture</label>
+            <select id="ouvPFSimple">
+              <option value="battante" selected>Battante</option>
+              <option value="oscillo">Oscillo-battante</option>
+              <option value="coulissante">Coulissante</option>
+              <option value="galandage">À galandage</option>
+              <option value="pliante">Pliante / accordéon</option>
+              <option value="fixe">Fixe</option>
+            </select>
+          </div>
+          <div class="check-field"><label><input type="checkbox" id="hautPFSimple"> En hauteur</label></div>
+        </div>
+        <div class="item-row">
+          <div class="field">
+            <label for="qtyPFDouble">Porte-fenêtre double</label>
+            <input type="number" id="qtyPFDouble" min="0" value="0">
+          </div>
+          <div class="field">
+            <label for="ouvPFDouble">Ouverture</label>
+            <select id="ouvPFDouble">
+              <option value="battante" selected>Battante</option>
+              <option value="oscillo">Oscillo-battante</option>
+              <option value="coulissante">Coulissante</option>
+              <option value="galandage">À galandage</option>
+              <option value="pliante">Pliante / accordéon</option>
+              <option value="fixe">Fixe</option>
+            </select>
+          </div>
+          <div class="check-field"><label><input type="checkbox" id="hautPFDouble"> En hauteur</label></div>
+        </div>
+
+        <button type="button" class="more-toggle" onclick="toggleMore(this)">+ Voir plus de menuiseries (vérandas, volets, garage, vitrines...)</button>
+        <div class="more-section" id="moreItems">
+
+        <p class="subhead">VITRES FIXES &amp; STRUCTURES</p>
+        <div class="row4">
+          <div class="field">
+            <label for="qtyVitreFixe">Vitres fixes</label>
+            <input type="number" id="qtyVitreFixe" min="0" value="0">
+          </div>
+          <div class="field">
+            <label for="qtyGardeCorps">Garde-corps vitrées</label>
+            <input type="number" id="qtyGardeCorps" min="0" value="0">
+          </div>
+        </div>
+
+        <p class="subhead">FENÊTRES DE TOIT</p>
+        <div class="row4">
+          <div class="field">
+            <label for="qtyVeluxStd">Vélux standard</label>
+            <input type="number" id="qtyVeluxStd" min="0" value="0">
+          </div>
+          <div class="field">
+            <label for="qtyVeluxHauteur">Vélux en hauteur <span class="hint">(3-4 m)</span></label>
+            <input type="number" id="qtyVeluxHauteur" min="0" value="0">
+          </div>
+        </div>
+
+        <p class="subhead">AUTRES MENUISERIES</p>
+        <div class="row4">
+          <div class="field">
+            <label for="qtyPorteEntree">Portes d'entrée vitrées</label>
+            <input type="number" id="qtyPorteEntree" min="0" value="0">
+          </div>
+          <div class="field">
+            <label for="qtyVeranda">Vérandas / verrières</label>
+            <input type="number" id="qtyVeranda" min="0" value="0">
+          </div>
+          <div class="field">
+            <label for="qtyGarage">Portes de garage vitrées</label>
+            <input type="number" id="qtyGarage" min="0" value="0">
+          </div>
+          <div class="field">
+            <label for="qtyVitrine">Vitrines commerciales</label>
+            <input type="number" id="qtyVitrine" min="0" value="0">
+          </div>
+          <div class="field">
+            <label for="qtyDevanture">Devanture pro <span class="hint">(enseigne)</span></label>
+            <input type="number" id="qtyDevanture" min="0" value="0">
+          </div>
+          <div class="field">
+            <label for="qtyAutre">Autre vitrage <span class="hint">(à préciser sur le devis)</span></label>
+            <input type="number" id="qtyAutre" min="0" value="0">
+          </div>
+        </div>
+
+        <p class="subhead">VOLETS (EN OPTION)</p>
+        <div class="row4">
+          <div class="field">
+            <label for="qtyVoletPetit">Volet — petit</label>
+            <input type="number" id="qtyVoletPetit" min="0" value="0">
+          </div>
+          <div class="field">
+            <label for="qtyVoletMoyen">Volet — moyen</label>
+            <input type="number" id="qtyVoletMoyen" min="0" value="0">
+          </div>
+          <div class="field">
+            <label for="qtyVoletGrand">Volet — grand</label>
+            <input type="number" id="qtyVoletGrand" min="0" value="0">
+          </div>
+        </div>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Prestation</h2>
+        <div class="field">
+          <label for="accessibilite">Accessibilité</label>
+          <select id="accessibilite">
+            <option value="0">Rez-de-chaussée / 1er étage</option>
+            <option value="1">2e - 3e étage</option>
+            <option value="2">4e étage et + / matériel spécifique</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="anciennete">Ancienneté du dernier nettoyage</label>
+          <select id="anciennete">
+            <option value="recent" selected>Récent — pas de majoration</option>
+            <option value="1an">Plus d'1 an</option>
+            <option value="3ans">Plus de 3 ans</option>
+          </select>
+        </div>
+        <fieldset>
+          <legend>Options supplémentaires</legend>
+          <div class="check-group">
+            <label><input type="checkbox" id="optEncadrements"> Encadrements et rebords (sur les fenêtres)</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Fréquences à proposer <span class="hint">(sélection multiple — un prix par fréquence cochée)</span></legend>
+          <div class="check-group">
+            <label><input type="checkbox" id="freqPonctuel" checked> Ponctuel</label>
+            <label><input type="checkbox" id="freqEssentiel"> Essentiel — 2 passages/an</label>
+            <label><input type="checkbox" id="freq4mois"> 1 passage tous les 4 mois</label>
+            <label><input type="checkbox" id="freqConfort"> Confort — 3 à 4 passages/an</label>
+            <label><input type="checkbox" id="freq2mois"> 1 passage tous les 2 mois</label>
+            <label><input type="checkbox" id="freqExcellence"> Excellence — 1 passage/mois</label>
+          </div>
+        </fieldset>
+      </div>
+      </div>
+
+    </div>
+
+    <div class="devis-panel" id="devisPanel">
+      <h2 id="panelBrand">Devis — Vitrio</h2>
+      <div id="staleWarning" class="stale-badge" style="display:none;"><span class="icon icon-alert"></span> Modifié depuis le dernier calcul — cliquez sur Calculer</div>
+      <div class="devis-meta" id="entrepriseAffichee"></div>
+      <div class="devis-meta" id="devisMeta"></div>
+      <div class="client-line" id="clientLine">Nouveau devis</div>
+      <div id="lineItems"></div>
+      <div id="freqTotals"></div>
+      <div id="mentionsAffichees" class="mentions-block"></div>
+
+      <div class="action-row">
+        <button class="print-btn" onclick="window.print()"><span class="icon icon-printer"></span> Imprimer / exporter le devis</button>
+        <button class="print-btn" onclick="exporterPDF()"><span class="icon icon-download"></span> Télécharger en PDF</button>
+        <button class="print-btn" onclick="envoyerEmail()"><span class="icon icon-mail"></span> Envoyer / partager le devis (PDF)</button>
+      </div>
+      <p class="hint" id="actionStatus" style="text-align:center; margin:8px 0 0;"></p>
+
+      <div class="signature-box">
+        <label style="display:block; font-size:13px; font-weight:600; color:var(--text-mid); margin-bottom:8px;">Signature de l'entreprise</label>
+        <canvas id="sigCanvas"></canvas>
+        <div class="sig-row">
+          <button type="button" class="secondary-btn" onclick="effacerSignature()">Effacer</button>
+          <button type="button" class="secondary-btn" onclick="validerSignature()"><span class="icon icon-check"></span> Valider et signer</button>
+        </div>
+        <p class="sig-status" id="sigStatus"></p>
+      </div>
+    </div>
+  </main>
+
+  <div style="max-width:1040px; margin:0 auto; padding:0 24px;">
+    <div class="card" id="historiqueCard">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+        <h2 style="margin-bottom:0;">Historique des devis</h2>
+        <button class="secondary-btn" id="viderHistBtn" style="width:auto; padding:8px 14px; font-size:12px;" onclick="viderHistorique(this)"><span class="icon icon-trash"></span> Tout vider</button>
+      </div>
+      <div id="historiqueList"><div class="empty-state"><span class="icon icon-inbox"></span><span>Aucun devis calculé pour le moment.</span></div></div>
+    </div>
+  </div>
+
+  <footer>
+    <span class="icon icon-cross"></span> Vitrio <span class="sep">·</span> calculateur de devis pour vitriers &amp; menuisiers
+  </footer>
+</div>
+
+<div id="screen-settings">
+  <div class="topbar">
+    <button class="back-btn" onclick="fermerReglages()" aria-label="Retour"><span class="icon icon-chevronleft"></span></button>
+    <span class="topbar-name">Réglages</span>
+  </div>
+  <div style="max-width:1040px; margin:0 auto; padding:20px 24px 100px;">
+
+    <details id="entrepriseSettings">
+      <summary><span class="icon icon-building"></span> Mon entreprise — personnalisation</summary>
+      <p class="hint" style="margin-top:-6px; margin-bottom:10px;">Ces informations remplacent la marque "Vitrio" sur le devis imprimé/PDF et dans l'en-tête de l'appli.</p>
+      <div class="field">
+        <label for="entrepriseNom">Nom de votre entreprise</label>
+        <input type="text" id="entrepriseNom" placeholder="Ex. Vitrerie Dupont">
+      </div>
+      <div class="field">
+        <label for="entrepriseAdresse">Adresse de l'entreprise</label>
+        <input type="text" id="entrepriseAdresse" placeholder="Ex. 12 rue de la Paix, 75002 Paris">
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="entrepriseSiret">SIRET</label>
+          <input type="text" id="entrepriseSiret" placeholder="Ex. 123 456 789 00012">
+        </div>
+        <div class="field">
+          <label for="entrepriseTelephone">Téléphone</label>
+          <input type="text" id="entrepriseTelephone" placeholder="Ex. 06 12 34 56 78">
+        </div>
+      </div>
+      <div class="field">
+        <label for="entrepriseEmail">Email de contact</label>
+        <input type="text" id="entrepriseEmail" placeholder="Ex. contact@monentreprise.fr">
+      </div>
+      <div class="field">
+        <label for="entrepriseLogo">Logo (image, optionnel)</label>
+        <input type="file" id="entrepriseLogo" accept="image/*" onchange="chargerLogo(event)" style="position:absolute; width:1px; height:1px; opacity:0; overflow:hidden;">
+        <label for="entrepriseLogo" class="secondary-btn" style="display:inline-block; cursor:pointer; text-align:center; width:auto; padding:10px 18px; font-size:13px;"><span class="icon icon-upload"></span> Choisir un fichier</label>
+        <br><img id="logoPreview" class="logo-preview" style="display:none;">
+      </div>
+      <div class="field">
+        <label for="entrepriseCouleur">Couleur d'accent</label>
+        <input type="color" id="entrepriseCouleur" value="#3F63FF" style="height:40px; padding:4px;">
+      </div>
+      <div class="field">
+        <label for="statutTVA">Statut TVA de votre entreprise</label>
+        <select id="statutTVA" onchange="appliquerBranding()">
+          <option value="franchise" selected>Franchise en base — TVA non applicable (art. 293 B du CGI)</option>
+          <option value="normal20">Assujetti — TVA 20 % (taux normal)</option>
+          <option value="sap10">Assujetti SAP — TVA 10 % (services à la personne, entretien courant à domicile)</option>
+        </select>
+        <p class="hint">Détermine la mention TVA affichée sur le devis. Le taux réel dépend de votre statut et de votre agrément — à confirmer avec votre comptable ou votre chambre de métiers.</p>
+      </div>
+      <div class="field">
+        <label for="mentionsLegales">Conditions complémentaires (facultatif)</label>
+        <textarea id="mentionsLegales" rows="2" placeholder="Ex. Acompte de 30% à la commande, solde à réception." style="width:100%; padding:10px 11px; border:1px solid var(--line); border-radius:7px; background:var(--surface-2); color:var(--text); font-family:'Inter',sans-serif; font-weight:500; font-size:13px;"></textarea>
+        <p class="hint">La mention TVA et, pour les clients professionnels, la clause légale de pénalités de retard sont ajoutées automatiquement sur chaque devis.</p>
+      </div>
+    </details>
+
+    <details id="tarifSettings">
+      <summary><span class="icon icon-settings"></span> Paramètres tarifaires — à ajuster selon vos tarifs</summary>
+      <p class="hint" style="margin-top:-6px; margin-bottom:10px;">Ces valeurs sont des exemples de départ. Modifiez-les pour qu'elles correspondent à vos prix réels ; le devis se recalcule au clic sur « Calculer ».</p>
+      <div class="settings-grid">
+        <div class="field"><label for="prixFenetre1V">Prix / fenêtre 1 vantail (€)</label><input type="number" id="prixFenetre1V" min="0" step="0.5" value="6"></div>
+        <div class="field"><label for="prixFenetre2V">Prix / fenêtre 2 vantaux (€)</label><input type="number" id="prixFenetre2V" min="0" step="0.5" value="12"></div>
+        <div class="field"><label for="prixFenetreTriangle">Prix / fenêtre triangle (€)</label><input type="number" id="prixFenetreTriangle" min="0" step="0.5" value="9"></div>
+        <div class="field"><label for="prixBaieSimple">Prix / baie vitrée simple (€)</label><input type="number" id="prixBaieSimple" min="0" step="0.5" value="12"></div>
+        <div class="field"><label for="prixBaieDouble">Prix / baie vitrée double (€)</label><input type="number" id="prixBaieDouble" min="0" step="0.5" value="24"></div>
+        <div class="field"><label for="prixPFSimple">Prix / porte-fenêtre simple (€)</label><input type="number" id="prixPFSimple" min="0" step="0.5" value="10"></div>
+        <div class="field"><label for="prixPFDouble">Prix / porte-fenêtre double (€)</label><input type="number" id="prixPFDouble" min="0" step="0.5" value="20"></div>
+        <div class="field"><label for="prixVitreFixe">Prix / vitre fixe (€)</label><input type="number" id="prixVitreFixe" min="0" step="0.5" value="6"></div>
+        <div class="field"><label for="prixGardeCorps">Prix / garde-corps vitré (€)</label><input type="number" id="prixGardeCorps" min="0" step="0.5" value="15"></div>
+        <div class="field"><label for="prixVeluxStd">Prix / vélux standard (€)</label><input type="number" id="prixVeluxStd" min="0" step="0.5" value="12"></div>
+        <div class="field"><label for="prixVeluxHauteur">Prix / vélux en hauteur (€)</label><input type="number" id="prixVeluxHauteur" min="0" step="0.5" value="24"></div>
+        <div class="field"><label for="prixPorteEntree">Prix / porte d'entrée vitrée (€)</label><input type="number" id="prixPorteEntree" min="0" step="0.5" value="10"></div>
+        <div class="field"><label for="prixVeranda">Prix / véranda, verrière (€)</label><input type="number" id="prixVeranda" min="0" step="0.5" value="25"></div>
+        <div class="field"><label for="prixGarage">Prix / porte de garage vitrée (€)</label><input type="number" id="prixGarage" min="0" step="0.5" value="14"></div>
+        <div class="field"><label for="prixVitrine">Prix / vitrine commerciale (€)</label><input type="number" id="prixVitrine" min="0" step="0.5" value="18"></div>
+        <div class="field"><label for="prixDevanture">Prix / devanture pro (€)</label><input type="number" id="prixDevanture" min="0" step="0.5" value="35"></div>
+        <div class="field"><label for="prixAutre">Prix / autre vitrage (€)</label><input type="number" id="prixAutre" min="0" step="0.5" value="7"></div>
+        <div class="field"><label for="prixVoletPetit">Prix / volet petit (€)</label><input type="number" id="prixVoletPetit" min="0" step="0.5" value="8"></div>
+        <div class="field"><label for="prixVoletMoyen">Prix / volet moyen (€)</label><input type="number" id="prixVoletMoyen" min="0" step="0.5" value="12"></div>
+        <div class="field"><label for="prixVoletGrand">Prix / volet grand (€)</label><input type="number" id="prixVoletGrand" min="0" step="0.5" value="18"></div>
+        <div class="field"><label for="majAcces1">Majoration accès 2e-3e étage (%)</label><input type="number" id="majAcces1" min="0" step="1" value="15"></div>
+        <div class="field"><label for="majAcces2">Majoration accès 4e+ / matériel (%)</label><input type="number" id="majAcces2" min="0" step="1" value="30"></div>
+        <div class="field"><label for="majOuvertureComplexe">Majoration ouverture à rails (%)</label><input type="number" id="majOuvertureComplexe" min="0" step="1" value="10"></div>
+        <div class="field"><label for="majAncien1an">Majoration non nettoyé +1 an (€, forfait)</label><input type="number" id="majAncien1an" min="0" step="1" value="50"></div>
+        <div class="field"><label for="majAncien3ans">Majoration non nettoyé +3 ans (€, forfait)</label><input type="number" id="majAncien3ans" min="0" step="1" value="100"></div>
+        <div class="field"><label for="prixEncadrements">Option encadrements (€ / fenêtre)</label><input type="number" id="prixEncadrements" min="0" step="0.5" value="5"></div>
+        <div class="field"><label for="remiseEssentiel">Remise formule Essentiel (%)</label><input type="number" id="remiseEssentiel" min="0" step="1" value="5"></div>
+        <div class="field"><label for="remise4mois">Remise 1 passage / 4 mois (%)</label><input type="number" id="remise4mois" min="0" step="1" value="8"></div>
+        <div class="field"><label for="remiseConfort">Remise formule Confort (%)</label><input type="number" id="remiseConfort" min="0" step="1" value="10"></div>
+        <div class="field"><label for="remise2mois">Remise 1 passage / 2 mois (%)</label><input type="number" id="remise2mois" min="0" step="1" value="15"></div>
+        <div class="field"><label for="remiseExcellence">Remise formule Excellence (%)</label><input type="number" id="remiseExcellence" min="0" step="1" value="20"></div>
+        <div class="field" style="grid-column:1/-1;"><label for="adresseDepart">Adresse de votre entreprise (point de départ)</label><input type="text" id="adresseDepart" placeholder="Ex. 12 rue de la Paix, 75002 Paris"></div>
+        <div class="field"><label for="prixParKm">Prix au km (€)</label><input type="number" id="prixParKm" min="0" step="0.1" value="1"></div>
+        <div class="field"><label for="minimumFacturation">Minimum de facturation (€)</label><input type="number" id="minimumFacturation" min="0" step="1" value="45"></div>
+      </div>
+    </details>
+
+    <button class="secondary-btn" style="width:100%; margin:16px 0 12px;" onclick="sauvegarderParametres()"><span class="icon icon-save"></span> Sauvegarder mes paramètres (entreprise + tarifs)</button>
+    <div class="btn-row" style="margin-bottom:8px;">
+      <button class="secondary-btn" style="flex:1;" onclick="exporterParametres()">⬇ Exporter (JSON)</button>
+      <input type="file" id="importFile" accept="application/json" onchange="importerParametres(event)" style="position:absolute; width:1px; height:1px; opacity:0; overflow:hidden;">
+      <label for="importFile" class="secondary-btn" style="flex:1; display:flex; align-items:center; justify-content:center; cursor:pointer;">⬆ Importer (JSON)</label>
+    </div>
+    <p class="hint" id="saveStatus" style="text-align:center; margin:-2px 0 16px;"></p>
+  </div>
+</div>
+
+<div class="bottom-bar" id="bottomBar">
+  <div class="bottom-bar-inner">
+    <button class="secondary-btn" onclick="nouveauDevis()">↺ Nouveau</button>
+    <button class="calc-btn" onclick="calculer()"><span class="icon icon-cross"></span> Calculer le devis</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+// ---------- Notifications toast ----------
+function toast(message, type){
+  type = type || 'success';
+  const container = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  const iconName = type === 'error' ? 'alert' : 'check';
+  el.innerHTML = `<span class="icon icon-${iconName}"></span><span>${message}</span>`;
+  container.appendChild(el);
+  requestAnimationFrame(() => el.classList.add('show'));
+  setTimeout(() => {
+    el.classList.remove('show');
+    setTimeout(() => el.remove(), 300);
+  }, 3200);
+}
+
+// ---------- Transition douce entre écrans ----------
+function basculerEcran(depuisId, versId, displayVers){
+  const depuis = document.getElementById(depuisId);
+  const vers = document.getElementById(versId);
+  depuis.style.transition = 'opacity 0.15s ease';
+  depuis.style.opacity = '0';
+  setTimeout(() => {
+    depuis.style.display = 'none';
+    depuis.style.opacity = '';
+    depuis.style.transition = '';
+    vers.style.display = displayVers;
+    vers.style.opacity = '0';
+    vers.style.transition = 'opacity 0.2s ease';
+    requestAnimationFrame(() => { vers.style.opacity = '1'; });
+    setTimeout(() => { vers.style.transition = ''; }, 220);
+  }, 150);
+}
+
+function allerVersChoixType(){
+  basculerEcran('screen-home', 'screen-typeclient', 'flex');
+}
+
+function choisirTypeClient(type){
+  const radio = document.getElementById(type === 'professionnel' ? 'typeClientPro' : 'typeClientParticulier');
+  radio.checked = true;
+  basculerEcran('screen-typeclient', 'screen-app', 'block');
+  document.getElementById('bottomBar').classList.add('visible');
+}
+
+function ouvrirReglages(){
+  basculerEcran('screen-app', 'screen-settings', 'block');
+  document.getElementById('bottomBar').classList.remove('visible');
+}
+function fermerReglages(){
+  basculerEcran('screen-settings', 'screen-app', 'block');
+  document.getElementById('bottomBar').classList.add('visible');
+}
+
+function toggleMore(btn){
+  const section = document.getElementById('moreItems');
+  const isOpen = section.classList.toggle('open');
+  btn.textContent = isOpen
+    ? '− Masquer les menuiseries supplémentaires'
+    : '+ Voir plus de menuiseries (vérandas, volets, garage, vitrines...)';
+}
+
+// ---------- Compteurs +/- pour les quantités ----------
+function activerCompteursQuantite(){
+  document.querySelectorAll('#quoteForm input[type="number"][id^="qty"]').forEach(input => {
+    if(input.closest('.qty-stepper')) return;
+    const wrapper = document.createElement('div');
+    wrapper.className = 'qty-stepper';
+
+    const minus = document.createElement('button');
+    minus.type = 'button';
+    minus.className = 'qty-btn';
+    minus.textContent = '−';
+    minus.setAttribute('aria-label', 'Diminuer');
+    minus.addEventListener('click', () => {
+      const v = Math.max(0, (parseInt(input.value, 10) || 0) - 1);
+      input.value = v;
+      input.dispatchEvent(new Event('input', {bubbles:true}));
+    });
+
+    const plus = document.createElement('button');
+    plus.type = 'button';
+    plus.className = 'qty-btn';
+    plus.textContent = '+';
+    plus.setAttribute('aria-label', 'Augmenter');
+    plus.addEventListener('click', () => {
+      const v = (parseInt(input.value, 10) || 0) + 1;
+      input.value = v;
+      input.dispatchEvent(new Event('input', {bubbles:true}));
+    });
+
+    input.parentNode.insertBefore(wrapper, input);
+    wrapper.appendChild(minus);
+    wrapper.appendChild(input);
+    wrapper.appendChild(plus);
+  });
+}
+
+// ---------- Résultat obsolète + compteur de progression ----------
+let resultStale = false;
+
+function marquerObsolete(){
+  if(!resultStale){
+    resultStale = true;
+    document.getElementById('devisPanel').classList.add('stale');
+    document.getElementById('staleWarning').style.display = 'block';
+  }
+  mettreAJourProgression();
+}
+
+function marquerAJour(){
+  resultStale = false;
+  document.getElementById('devisPanel').classList.remove('stale');
+  document.getElementById('staleWarning').style.display = 'none';
+}
+
+function mettreAJourProgression(){
+  let count = 0;
+  document.querySelectorAll('#quoteForm input[type="number"][id^="qty"]').forEach(el => {
+    count += parseInt(el.value, 10) || 0;
+  });
+  const note = document.getElementById('progressNote');
+  note.textContent = count > 0 ? `${count} élément${count>1?'s':''} ajouté${count>1?'s':''}` : '';
+}
+
+function activerDetectionObsolete(){
+  document.querySelectorAll('#quoteForm input, #quoteForm select').forEach(el => {
+    el.addEventListener('input', marquerObsolete);
+    el.addEventListener('change', marquerObsolete);
+  });
+}
+
+// ---------- Identification du prestataire (locale, non sécurisée) ----------
+let currentPrestataire = '';
+
+function chargerPrestataires(){
+  let liste = [];
+  try{ liste = JSON.parse(localStorage.getItem('croisee_prestataires') || '[]'); }catch(e){}
+  const sel = document.getElementById('prestataireSelect');
+  sel.innerHTML = '<option value="">— Choisir un prestataire —</option>' +
+    liste.map(n => `<option value="${n}">${n}</option>`).join('');
+}
+
+function afficherPrestataireTopbar(){
+  const el = document.getElementById('prestataireBadge');
+  if(el) el.innerHTML = currentPrestataire ? `<span class="icon icon-user"></span> ${currentPrestataire} · changer` : '';
+}
+
+function validerPrestataire(){
+  const sel = document.getElementById('prestataireSelect').value;
+  const nouveau = document.getElementById('prestataireNouveau').value.trim();
+  const nom = nouveau || sel;
+  if(!nom){
+    document.getElementById('identifyStatus').textContent = 'Indiquez votre nom pour continuer.';
+    return;
+  }
+  document.getElementById('identifyStatus').textContent = '';
+  currentPrestataire = nom;
+  try{
+    let liste = JSON.parse(localStorage.getItem('croisee_prestataires') || '[]');
+    if(!liste.includes(nom)){ liste.push(nom); localStorage.setItem('croisee_prestataires', JSON.stringify(liste)); }
+    localStorage.setItem('croisee_dernier_prestataire', nom);
+  }catch(e){}
+  afficherPrestataireTopbar();
+  basculerEcran('screen-identify', 'screen-home', 'flex');
+}
+
+function changerPrestataire(){
+  document.getElementById('screen-app').style.display = 'none';
+  document.getElementById('screen-home').style.display = 'none';
+  chargerPrestataires();
+  document.getElementById('prestataireNouveau').value = '';
+  document.getElementById('screen-identify').style.display = 'flex';
+}
+
+function euros(n){
+  return n.toLocaleString('fr-FR', {style:'currency', currency:'EUR'});
+}
+
+async function geocode(address){
+  const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(address)}`;
+  let res;
+  try{
+    res = await fetch(url, {headers:{'Accept':'application/json'}});
+  }catch(networkErr){
+    const err = new Error('network');
+    err.detail = networkErr.message;
+    throw err;
+  }
+  if(!res.ok){
+    const err = new Error('http');
+    err.detail = 'HTTP ' + res.status;
+    throw err;
+  }
+  const data = await res.json();
+  if(!data.length) throw new Error('not-found');
+  return {lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon)};
+}
+
+function messageAdresse(label, e){
+  if(window.location.protocol === 'file:'){
+    return `Adresse ${label} : le calcul automatique ne peut pas fonctionner en ouvrant le fichier directement depuis votre ordinateur (protocole file://) — les navigateurs bloquent ces requêtes. Il faut héberger le fichier en ligne (ex. Netlify) pour que ça marche. Entrez le kilométrage à la main pour l'instant.`;
+  }
+  if(e && e.message === 'network'){
+    return `Adresse ${label} : connexion au service de géocodage impossible (réseau bloqué ou hors ligne). Détail technique : ${e.detail || 'inconnu'}.`;
+  }
+  if(e && e.message === 'http'){
+    return `Adresse ${label} : le service de géocodage a renvoyé une erreur (${e.detail}). Réessayez dans un instant.`;
+  }
+  return `Adresse ${label} introuvable par le service. Essayez un format plus précis : numéro, rue, code postal, ville.`;
+}
+
+function haversineKm(p1, p2){
+  const R = 6371;
+  const dLat = (p2.lat - p1.lat) * Math.PI/180;
+  const dLon = (p2.lon - p1.lon) * Math.PI/180;
+  const a = Math.sin(dLat/2)**2 + Math.cos(p1.lat*Math.PI/180)*Math.cos(p2.lat*Math.PI/180)*Math.sin(dLon/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+async function calculerTrajet(){
+  const statusEl = document.getElementById('trajetStatus');
+  const depart = document.getElementById('adresseDepart').value.trim();
+  const arrivee = document.getElementById('adresseClient').value.trim();
+
+  if(!depart || !arrivee){
+    statusEl.textContent = "Renseignez l'adresse de votre entreprise (paramètres tarifaires) et l'adresse du client ci-dessus.";
+    statusEl.style.color = '#D64545';
+    return;
+  }
+
+  statusEl.textContent = 'Recherche des adresses...';
+  statusEl.style.color = 'var(--text-mid)';
+
+  let p1, p2;
+  try{
+    p1 = await geocode(depart);
+  }catch(e){
+    statusEl.textContent = messageAdresse("de l'entreprise", e);
+    statusEl.style.color = '#D64545';
+    return;
+  }
+  try{
+    p2 = await geocode(arrivee);
+  }catch(e){
+    statusEl.textContent = messageAdresse('du client', e);
+    statusEl.style.color = '#D64545';
+    return;
+  }
+
+  statusEl.textContent = "Calcul de l'itinéraire...";
+  try{
+    const url = `https://router.project-osrm.org/route/v1/driving/${p1.lon},${p1.lat};${p2.lon},${p2.lat}?overview=false`;
+    const res = await fetch(url);
+    if(!res.ok) throw new Error('route-failed');
+    const data = await res.json();
+    if(!data.routes || !data.routes.length) throw new Error('no-route');
+    const km = data.routes[0].distance / 1000;
+    document.getElementById('distanceKm').value = km.toFixed(1);
+    statusEl.textContent = `Trajet estimé : ${km.toFixed(1)} km (aller simple, itinéraire routier). Ajustez si besoin.`;
+    statusEl.style.color = '#16A34A';
+  }catch(err){
+    const km = haversineKm(p1, p2) * 1.3;
+    document.getElementById('distanceKm').value = km.toFixed(1);
+    statusEl.textContent = `Service d'itinéraire indisponible — estimation à vol d'oiseau (×1.3) utilisée : ${km.toFixed(1)} km. Vérifiez et ajustez si besoin.`;
+    statusEl.style.color = '#C77B12';
+  }
+}
+
+const RAIL_TYPES = ['coulissante','galandage','pliante'];
+
+function itemAmount(qty, price, ouvertureVal, hauteurChecked, majRail){
+  let amt = qty * price;
+  if(hauteurChecked) amt *= 2;
+  if(ouvertureVal && RAIL_TYPES.includes(ouvertureVal)) amt += amt * (majRail/100);
+  return amt;
+}
+
+function calculer(){
+  marquerAJour();
+  mettreAJourProgression();
+  const val = id => parseFloat(document.getElementById(id).value) || 0;
+  const chk = id => document.getElementById(id).checked;
+  const sel = id => document.getElementById(id).value;
+
+  const majOuvertureComplexe = val('majOuvertureComplexe');
+
+  // Quantities
+  const qtyFenetre1V = val('qtyFenetre1V');
+  const qtyFenetre2V = val('qtyFenetre2V');
+  const qtyFenetreTriangle = val('qtyFenetreTriangle');
+  const qtyBaieSimple = val('qtyBaieSimple');
+  const qtyBaieDouble = val('qtyBaieDouble');
+  const qtyPFSimple = val('qtyPFSimple');
+  const qtyPFDouble = val('qtyPFDouble');
+  const qtyVitreFixe = val('qtyVitreFixe');
+  const qtyGardeCorps = val('qtyGardeCorps');
+  const qtyVeluxStd = val('qtyVeluxStd');
+  const qtyVeluxHauteur = val('qtyVeluxHauteur');
+  const qtyPorteEntree = val('qtyPorteEntree');
+  const qtyVeranda = val('qtyVeranda');
+  const qtyGarage = val('qtyGarage');
+  const qtyVitrine = val('qtyVitrine');
+  const qtyDevanture = val('qtyDevanture');
+  const qtyAutre = val('qtyAutre');
+  const qtyVoletPetit = val('qtyVoletPetit');
+  const qtyVoletMoyen = val('qtyVoletMoyen');
+  const qtyVoletGrand = val('qtyVoletGrand');
+
+  // Amounts (opening-eligible items include ouverture + hauteur)
+  const amtFenetre1V = itemAmount(qtyFenetre1V, val('prixFenetre1V'), sel('ouvFenetre1V'), chk('hautFenetre1V'), majOuvertureComplexe);
+  const amtFenetre2V = itemAmount(qtyFenetre2V, val('prixFenetre2V'), sel('ouvFenetre2V'), chk('hautFenetre2V'), majOuvertureComplexe);
+  const amtFenetreTriangle = itemAmount(qtyFenetreTriangle, val('prixFenetreTriangle'), sel('ouvFenetreTriangle'), chk('hautFenetreTriangle'), majOuvertureComplexe);
+  const amtBaieSimple = itemAmount(qtyBaieSimple, val('prixBaieSimple'), sel('ouvBaieSimple'), chk('hautBaieSimple'), majOuvertureComplexe);
+  const amtBaieDouble = itemAmount(qtyBaieDouble, val('prixBaieDouble'), sel('ouvBaieDouble'), chk('hautBaieDouble'), majOuvertureComplexe);
+  const amtPFSimple = itemAmount(qtyPFSimple, val('prixPFSimple'), sel('ouvPFSimple'), chk('hautPFSimple'), majOuvertureComplexe);
+  const amtPFDouble = itemAmount(qtyPFDouble, val('prixPFDouble'), sel('ouvPFDouble'), chk('hautPFDouble'), majOuvertureComplexe);
+
+  // Plain amounts (qty * price only)
+  const amtVitreFixe = qtyVitreFixe * val('prixVitreFixe');
+  const amtGardeCorps = qtyGardeCorps * val('prixGardeCorps');
+  const amtVeluxStd = qtyVeluxStd * val('prixVeluxStd');
+  const amtVeluxHauteur = qtyVeluxHauteur * val('prixVeluxHauteur');
+  const amtPorteEntree = qtyPorteEntree * val('prixPorteEntree');
+  const amtVeranda = qtyVeranda * val('prixVeranda');
+  const amtGarage = qtyGarage * val('prixGarage');
+  const amtVitrine = qtyVitrine * val('prixVitrine');
+  const amtDevanture = qtyDevanture * val('prixDevanture');
+  const amtAutre = qtyAutre * val('prixAutre');
+  const amtVoletPetit = qtyVoletPetit * val('prixVoletPetit');
+  const amtVoletMoyen = qtyVoletMoyen * val('prixVoletMoyen');
+  const amtVoletGrand = qtyVoletGrand * val('prixVoletGrand');
+
+  const baseVitres = amtFenetre1V + amtFenetre2V + amtFenetreTriangle + amtBaieSimple + amtBaieDouble +
+    amtPFSimple + amtPFDouble + amtVitreFixe + amtGardeCorps + amtVeluxStd + amtVeluxHauteur +
+    amtPorteEntree + amtVeranda + amtGarage + amtVitrine + amtDevanture + amtAutre +
+    amtVoletPetit + amtVoletMoyen + amtVoletGrand;
+
+  // Accessibility
+  const accessibilite = parseInt(document.getElementById('accessibilite').value, 10);
+  const majAccesPct = accessibilite === 1 ? val('majAcces1') : (accessibilite === 2 ? val('majAcces2') : 0);
+  const accessSurcharge = baseVitres * majAccesPct/100;
+
+  // Ancienneté
+  const anciennete = sel('anciennete');
+  let ancienneteSurcharge = 0;
+  let ancienneteLabel = '';
+  if(anciennete === '1an'){ ancienneteSurcharge = val('majAncien1an'); ancienneteLabel = 'Non nettoyé depuis +1 an'; }
+  if(anciennete === '3ans'){ ancienneteSurcharge = val('majAncien3ans'); ancienneteLabel = 'Non nettoyé depuis +3 ans'; }
+
+  // Options
+  const optEncadrements = chk('optEncadrements');
+  const prixEncadrements = val('prixEncadrements');
+  const nombreFenetres = qtyFenetre1V + qtyFenetre2V + qtyFenetreTriangle;
+  const encadrementsTotal = optEncadrements ? prixEncadrements * nombreFenetres : 0;
+
+  const subtotal = baseVitres + accessSurcharge + ancienneteSurcharge + encadrementsTotal;
+
+  // Travel
+  const distanceKm = val('distanceKm');
+  const allerRetour = chk('allerRetour');
+  const prixParKm = val('prixParKm');
+  const distanceTotale = allerRetour ? distanceKm * 2 : distanceKm;
+  const fraisDeplacement = distanceTotale * prixParKm;
+  const minimumFacturation = val('minimumFacturation');
+
+  const typeClient = document.querySelector('input[name=typeClient]:checked').value;
+  const creditImpot = chk('creditImpot');
+
+  // Line items (common to all frequencies)
+  const items = [];
+  if(qtyFenetre1V>0) items.push([`${qtyFenetre1V} fenêtre(s) 1 vantail`, amtFenetre1V]);
+  if(qtyFenetre2V>0) items.push([`${qtyFenetre2V} fenêtre(s) 2 vantaux`, amtFenetre2V]);
+  if(qtyFenetreTriangle>0) items.push([`${qtyFenetreTriangle} fenêtre(s) triangle`, amtFenetreTriangle]);
+  if(qtyBaieSimple>0) items.push([`${qtyBaieSimple} baie(s) vitrée(s) simple`, amtBaieSimple]);
+  if(qtyBaieDouble>0) items.push([`${qtyBaieDouble} baie(s) vitrée(s) double`, amtBaieDouble]);
+  if(qtyPFSimple>0) items.push([`${qtyPFSimple} porte(s)-fenêtre(s) simple`, amtPFSimple]);
+  if(qtyPFDouble>0) items.push([`${qtyPFDouble} porte(s)-fenêtre(s) double`, amtPFDouble]);
+  if(qtyVitreFixe>0) items.push([`${qtyVitreFixe} vitre(s) fixe(s)`, amtVitreFixe]);
+  if(qtyGardeCorps>0) items.push([`${qtyGardeCorps} garde-corps vitré(s)`, amtGardeCorps]);
+  if(qtyVeluxStd>0) items.push([`${qtyVeluxStd} vélux standard`, amtVeluxStd]);
+  if(qtyVeluxHauteur>0) items.push([`${qtyVeluxHauteur} vélux en hauteur`, amtVeluxHauteur]);
+  if(qtyPorteEntree>0) items.push([`${qtyPorteEntree} porte(s) d'entrée vitrée(s)`, amtPorteEntree]);
+  if(qtyVeranda>0) items.push([`${qtyVeranda} véranda(s) / verrière(s)`, amtVeranda]);
+  if(qtyGarage>0) items.push([`${qtyGarage} porte(s) de garage vitrée(s)`, amtGarage]);
+  if(qtyVitrine>0) items.push([`${qtyVitrine} vitrine(s) commerciale(s)`, amtVitrine]);
+  if(qtyDevanture>0) items.push([`${qtyDevanture} devanture(s) pro`, amtDevanture]);
+  if(qtyAutre>0) items.push([`${qtyAutre} autre(s) vitrage(s)`, amtAutre]);
+  if(qtyVoletPetit>0) items.push([`${qtyVoletPetit} volet(s) petit`, amtVoletPetit]);
+  if(qtyVoletMoyen>0) items.push([`${qtyVoletMoyen} volet(s) moyen`, amtVoletMoyen]);
+  if(qtyVoletGrand>0) items.push([`${qtyVoletGrand} volet(s) grand`, amtVoletGrand]);
+  if(accessSurcharge>0) items.push(['Majoration accessibilité', accessSurcharge]);
+  if(ancienneteSurcharge>0) items.push([ancienneteLabel, ancienneteSurcharge]);
+  if(encadrementsTotal>0) items.push([`Encadrements et rebords (${nombreFenetres} fenêtre(s))`, encadrementsTotal]);
+
+  const lineItemsEl = document.getElementById('lineItems');
+  if(items.length === 0){
+    lineItemsEl.innerHTML = '<div class="empty-state"><span class="icon icon-inbox"></span><span>Renseignez les menuiseries puis cliquez sur « Calculer le devis ».</span></div>';
+  } else {
+    lineItemsEl.innerHTML = items.map(([label, amount]) =>
+      `<div class="line-item"><span>${label}</span><span>${euros(amount)}</span></div>`
+    ).join('') +
+    `<div class="line-item"><span>Déplacement (${distanceTotale} km × ${euros(prixParKm)})</span><span>${euros(fraisDeplacement)}</span></div>`;
+  }
+
+  // Frequencies
+  const freqDefs = [
+    {id:'freqPonctuel', label:'Ponctuel', discount:0},
+    {id:'freqEssentiel', label:'Essentiel (2x/an)', discount:val('remiseEssentiel')},
+    {id:'freq4mois', label:'1 passage / 4 mois', discount:val('remise4mois')},
+    {id:'freqConfort', label:'Confort (3-4x/an)', discount:val('remiseConfort')},
+    {id:'freq2mois', label:'1 passage / 2 mois', discount:val('remise2mois')},
+    {id:'freqExcellence', label:'Excellence (1x/mois)', discount:val('remiseExcellence')}
+  ];
+  const selected = freqDefs.filter(f => chk(f.id));
+
+  // Mentions légales + taux de TVA réel (calculé avant les fréquences pour le HT/TVA/TTC)
+  const tvaTexts = {
+    franchise: "TVA non applicable, art. 293 B du CGI.",
+    normal20: "TVA au taux normal de 20 % (article 278 du CGI).",
+    sap10: "TVA au taux réduit de 10 % (article 279 du CGI) — services à la personne, entretien courant à domicile, sous réserve de l'agrément/déclaration SAP en vigueur."
+  };
+  const tvaRates = { franchise: 0, normal20: 20, sap10: 10 };
+  const statutTVA = document.getElementById('statutTVA').value;
+  const tauxTVA = tvaRates[statutTVA] || 0;
+
+  const freqResults = selected.map(f => {
+    const discountAmount = subtotal * f.discount/100;
+    const afterDiscount = Math.max(subtotal - discountAmount, 0);
+    const afterMinimum = Math.max(afterDiscount, minimumFacturation);
+    const ht = afterMinimum + fraisDeplacement;
+    const tva = ht * tauxTVA/100;
+    const ttc = ht + tva;
+    return {label: f.label, ht, tva, ttc, tauxTVA};
+  });
+
+  const freqTotalsEl = document.getElementById('freqTotals');
+  if(freqResults.length === 0){
+    freqTotalsEl.innerHTML = '<div class="empty-state"><span class="icon icon-inbox"></span><span>Sélectionnez au moins une fréquence.</span></div>';
+  } else {
+    freqTotalsEl.innerHTML = freqResults.map(f => {
+      let rows;
+      if(typeClient === 'particulier' && creditImpot){
+        const aujourdhui = f.ttc/2;
+        rows = `<div class="freq-row"><span class="flabel">${f.label} — à régler aujourd'hui</span><span class="fvalue">${euros(aujourdhui)}</span></div>` +
+          `<div class="freq-split">Total TTC : ${euros(f.ttc)} · solde via avance Urssaf : ${euros(f.ttc - aujourdhui)}</div>`;
+      } else {
+        rows = `<div class="freq-row"><span class="flabel">${f.label}</span><span class="fvalue">${euros(f.ttc)}</span></div>`;
+      }
+      if(f.tauxTVA > 0){
+        rows += `<div class="freq-split">Dont HT : ${euros(f.ht)} · TVA (${f.tauxTVA}%) : ${euros(f.tva)}</div>`;
+      }
+      return rows;
+    }).join('');
+  }
+
+  // Mentions légales affichées
+  let mentions = tvaTexts[statutTVA] || '';
+  const complement = document.getElementById('mentionsLegales').value.trim();
+  if(complement) mentions += ' ' + complement;
+  if(typeClient === 'professionnel'){
+    mentions += " En cas de retard de paiement, des pénalités calculées au taux directeur de la BCE majoré de 10 points sont exigibles, ainsi qu'une indemnité forfaitaire de 40 € pour frais de recouvrement (articles L441-10 et D441-5 du Code de commerce).";
+  }
+  document.getElementById('mentionsAffichees').textContent = mentions;
+
+  // Coordonnées entreprise affichées sur le devis
+  const eAdresse = document.getElementById('entrepriseAdresse').value.trim();
+  const eSiret = document.getElementById('entrepriseSiret').value.trim();
+  const eTel = document.getElementById('entrepriseTelephone').value.trim();
+  const eEmail = document.getElementById('entrepriseEmail').value.trim();
+  const coordEntreprise = [eAdresse, eSiret ? 'SIRET '+eSiret : '', eTel, eEmail].filter(Boolean).join(' · ');
+  document.getElementById('entrepriseAffichee').textContent = coordEntreprise;
+
+  const nom = document.getElementById('clientNom').value.trim();
+  const secteur = document.getElementById('secteur').value.trim();
+  const adresseClientVal = document.getElementById('adresseClient').value.trim();
+  document.getElementById('clientLine').innerHTML =
+    (nom || 'Nouveau devis') + ' — ' + (typeClient === 'particulier' ? 'Particulier' : 'Professionnel') + ' — ' + (secteur || 'secteur non précisé') +
+    (adresseClientVal ? `<br>${adresseClientVal}` : '');
+
+  document.getElementById('creditImpotField').style.display = typeClient === 'particulier' ? 'block' : 'none';
+
+  // Expose last results for PDF / email / history
+  window.lastItems = items.concat([[`Déplacement (${distanceTotale} km)`, fraisDeplacement]]);
+  window.lastFreqResults = freqResults;
+  window.lastClientNom = nom;
+
+  afficherDevisMeta();
+  sauvegarderHistorique(nom, secteur, freqResults);
+  sauvegarderClient(nom, secteur);
+}
+
+// ---------- Generic form serialize / restore ----------
+function isFormField(el){
+  return ['INPUT','SELECT','TEXTAREA'].includes(el.tagName);
+}
+function serializeContainer(containerId){
+  const data = {};
+  document.querySelectorAll('#' + containerId + ' [id]').forEach(el => {
+    if(!isFormField(el)) return;
+    if(el.type === 'file' || el.type === 'button') return;
+    if(el.type === 'checkbox' || el.type === 'radio') data[el.id] = el.checked;
+    else data[el.id] = el.value;
+  });
+  return data;
+}
+function restoreContainer(data){
+  Object.keys(data).forEach(id => {
+    const el = document.getElementById(id);
+    if(!el || !isFormField(el)) return;
+    if(el.type === 'checkbox' || el.type === 'radio') el.checked = data[id];
+    else el.value = data[id];
+  });
+}
+
+let DEFAULT_QUOTE_STATE = null;
+
+// ---------- Mon entreprise / branding ----------
+function chargerLogo(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const dataUrl = e.target.result;
+    try{ localStorage.setItem('croisee_logo', dataUrl); }catch(err){}
+    const img = document.getElementById('logoPreview');
+    img.src = dataUrl;
+    img.style.display = 'inline-block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function appliquerBranding(){
+  const nom = document.getElementById('entrepriseNom').value.trim();
+  const couleur = document.getElementById('entrepriseCouleur').value;
+  if(couleur) document.documentElement.style.setProperty('--accent', couleur);
+  const displayName = nom || 'Vitrio';
+  const topbarEl = document.getElementById('topbarName');
+  const homeEl = document.getElementById('homeName');
+  const panelEl = document.getElementById('panelBrand');
+  if(topbarEl) topbarEl.textContent = displayName;
+  if(homeEl) homeEl.textContent = displayName;
+  if(panelEl) panelEl.textContent = 'Devis — ' + displayName;
+}
+
+function sauvegarderParametres(){
+  const settings = {
+    entreprise: serializeContainer('entrepriseSettings'),
+    tarifs: serializeContainer('tarifSettings')
+  };
+  try{
+    localStorage.setItem('croisee_settings', JSON.stringify(settings));
+    toast('Paramètres sauvegardés sur cet appareil.', 'success');
+  }catch(e){
+    toast('Échec de la sauvegarde (stockage indisponible).', 'error');
+  }
+  appliquerBranding();
+}
+
+function chargerParametres(){
+  try{
+    const raw = localStorage.getItem('croisee_settings');
+    if(raw){
+      const settings = JSON.parse(raw);
+      if(settings.entreprise) restoreContainer(settings.entreprise);
+      if(settings.tarifs) restoreContainer(settings.tarifs);
+    }
+  }catch(e){}
+  try{
+    const logo = localStorage.getItem('croisee_logo');
+    if(logo){
+      const img = document.getElementById('logoPreview');
+      img.src = logo;
+      img.style.display = 'inline-block';
+    }
+  }catch(e){}
+  appliquerBranding();
+}
+
+function exporterParametres(){
+  const settings = {
+    entreprise: serializeContainer('entrepriseSettings'),
+    tarifs: serializeContainer('tarifSettings'),
+    logo: null
+  };
+  try{ settings.logo = localStorage.getItem('croisee_logo') || null; }catch(e){}
+  const blob = new Blob([JSON.stringify(settings, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  const nomFichier = (document.getElementById('entrepriseNom').value.trim() || 'croisee').toLowerCase().replace(/[^a-z0-9]+/g,'-');
+  a.download = `parametres-${nomFichier}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  toast('Fichier de paramètres téléchargé.', 'success');
+}
+
+function importerParametres(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      const settings = JSON.parse(e.target.result);
+      if(settings.entreprise) restoreContainer(settings.entreprise);
+      if(settings.tarifs) restoreContainer(settings.tarifs);
+      if(settings.logo){
+        localStorage.setItem('croisee_logo', settings.logo);
+        const img = document.getElementById('logoPreview');
+        img.src = settings.logo;
+        img.style.display = 'inline-block';
+      }
+      sauvegarderParametres();
+      toast('Paramètres importés et sauvegardés sur cet appareil.', 'success');
+    }catch(err){
+      toast("Fichier invalide — impossible d'importer ces paramètres.", 'error');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+// ---------- Numéro de devis ----------
+let currentDevisNumero = '';
+let currentDevisDate = new Date();
+
+function genererNumeroDevis(){
+  let counter = 1;
+  try{
+    counter = parseInt(localStorage.getItem('croisee_compteur') || '0', 10) + 1;
+    localStorage.setItem('croisee_compteur', String(counter));
+  }catch(e){ counter = Math.floor(Math.random()*9999); }
+  currentDevisNumero = `DEVIS-${new Date().getFullYear()}-${String(counter).padStart(4,'0')}`;
+  currentDevisDate = new Date();
+}
+
+function afficherDevisMeta(){
+  const dateStr = currentDevisDate.toLocaleDateString('fr-FR');
+  const validite = new Date(currentDevisDate);
+  validite.setDate(validite.getDate() + 30);
+  const parLigne = currentPrestataire ? ` · Préparé par <b>${currentPrestataire}</b>` : '';
+  document.getElementById('devisMeta').innerHTML =
+    `N° <b>${currentDevisNumero}</b> · Émis le <b>${dateStr}</b> · Valable jusqu'au <b>${validite.toLocaleDateString('fr-FR')}</b>${parLigne}`;
+}
+
+// ---------- Nouveau devis ----------
+function nouveauDevis(){
+  if(DEFAULT_QUOTE_STATE) restoreContainer(DEFAULT_QUOTE_STATE);
+  document.getElementById('carnetClients').value = '';
+  effacerSignature();
+  genererNumeroDevis();
+  calculer();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ---------- Historique ----------
+function sauvegarderHistorique(nom, secteur, freqResults){
+  try{
+    let hist = JSON.parse(localStorage.getItem('croisee_historique') || '[]');
+    const idxExistant = hist.findIndex(h => h.numero === currentDevisNumero);
+    const statutExistant = idxExistant >= 0 ? (hist[idxExistant].statut || 'calculé') : 'calculé';
+    const entry = {
+      numero: currentDevisNumero,
+      date: currentDevisDate.toISOString(),
+      client: nom || 'Client non renseigné',
+      secteur: secteur || '',
+      prestataire: currentPrestataire || '',
+      statut: statutExistant,
+      totaux: freqResults,
+      formData: serializeContainer('quoteForm')
+    };
+    if(idxExistant >= 0) hist[idxExistant] = entry; else hist.unshift(entry);
+    hist = hist.slice(0, 50);
+    localStorage.setItem('croisee_historique', JSON.stringify(hist));
+    afficherHistorique();
+  }catch(e){}
+}
+
+function marquerStatutDevis(statut){
+  try{
+    let hist = JSON.parse(localStorage.getItem('croisee_historique') || '[]');
+    const idx = hist.findIndex(h => h.numero === currentDevisNumero);
+    if(idx >= 0){
+      hist[idx].statut = statut;
+      localStorage.setItem('croisee_historique', JSON.stringify(hist));
+      afficherHistorique();
+    }
+  }catch(e){}
+}
+
+function afficherHistorique(){
+  const el = document.getElementById('historiqueList');
+  let hist = [];
+  try{ hist = JSON.parse(localStorage.getItem('croisee_historique') || '[]'); }catch(e){}
+  if(hist.length === 0){
+    el.innerHTML = '<div class="empty-state"><span class="icon icon-inbox"></span><span>Aucun devis calculé pour le moment.</span></div>';
+    return;
+  }
+  el.innerHTML = hist.map((h, i) => {
+    const d = new Date(h.date);
+    const montant = h.totaux && h.totaux.length ? euros(h.totaux[0].ttc !== undefined ? h.totaux[0].ttc : h.totaux[0].total) : '—';
+    const statut = h.statut || 'calculé';
+    const statutStyles = {
+      'calculé': 'background:rgba(91,100,114,0.12); color:#5B6472;',
+      'envoyé': 'background:rgba(63,99,255,0.12); color:#2A45D6;',
+      'signé': 'background:rgba(22,163,74,0.12); color:#16A34A;'
+    };
+    const badge = `<span style="display:inline-block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.4px; padding:2px 8px; border-radius:999px; margin-left:8px; ${statutStyles[statut] || statutStyles['calculé']}">${statut}</span>`;
+    return `<div class="history-item">
+      <div>
+        <div>${h.numero} — ${h.client}${badge}</div>
+        <div class="hmeta">${d.toLocaleDateString('fr-FR')} ${h.secteur ? '· '+h.secteur : ''} ${h.prestataire ? '· '+h.prestataire : ''} · à partir de ${montant}</div>
+      </div>
+      <div style="display:flex; gap:6px;">
+        <button onclick="rechargerDevis(${i})">Recharger</button>
+        <button onclick="supprimerDevis(${i}, this)" style="color:#D64545;"><span class="icon icon-trash"></span></button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function supprimerDevis(index, btn){
+  if(btn.dataset.confirm !== 'yes'){
+    btn.dataset.confirm = 'yes';
+    btn.innerHTML = '<span class="icon icon-check"></span> Confirmer';
+    btn.style.color = '#fff';
+    btn.style.background = '#E5484D';
+    btn.style.borderColor = '#E5484D';
+    clearTimeout(btn._resetTimer);
+    btn._resetTimer = setTimeout(() => {
+      btn.dataset.confirm = '';
+      btn.innerHTML = '<span class="icon icon-trash"></span>';
+      btn.style.color = '#D64545';
+      btn.style.background = '';
+      btn.style.borderColor = '';
+    }, 3000);
+    return;
+  }
+  clearTimeout(btn._resetTimer);
+  try{
+    let hist = JSON.parse(localStorage.getItem('croisee_historique') || '[]');
+    hist.splice(index, 1);
+    localStorage.setItem('croisee_historique', JSON.stringify(hist));
+    afficherHistorique();
+    toast('Devis supprimé de l\'historique.', 'success');
+  }catch(e){}
+}
+
+function viderHistorique(btn){
+  let hist = [];
+  try{ hist = JSON.parse(localStorage.getItem('croisee_historique') || '[]'); }catch(e){}
+  if(hist.length === 0) return;
+  if(btn.dataset.confirm !== 'yes'){
+    btn.dataset.confirm = 'yes';
+    btn.innerHTML = '<span class="icon icon-check"></span> Confirmer la suppression';
+    btn.style.color = '#fff';
+    btn.style.background = '#E5484D';
+    btn.style.borderColor = '#E5484D';
+    clearTimeout(btn._resetTimer);
+    btn._resetTimer = setTimeout(() => {
+      btn.dataset.confirm = '';
+      btn.innerHTML = '<span class="icon icon-trash"></span> Tout vider';
+      btn.style.color = '';
+      btn.style.background = '';
+      btn.style.borderColor = '';
+    }, 3000);
+    return;
+  }
+  clearTimeout(btn._resetTimer);
+  try{
+    localStorage.removeItem('croisee_historique');
+    afficherHistorique();
+    toast('Historique vidé.', 'success');
+  }catch(e){}
+}
+
+function rechargerDevis(index){
+  try{
+    const hist = JSON.parse(localStorage.getItem('croisee_historique') || '[]');
+    const entry = hist[index];
+    if(!entry) return;
+    restoreContainer(entry.formData);
+    currentDevisNumero = entry.numero;
+    currentDevisDate = new Date(entry.date);
+    document.getElementById('screen-app').style.display = 'block';
+    document.getElementById('bottomBar').classList.add('visible');
+    calculer();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }catch(e){}
+}
+
+// ---------- Carnet clients ----------
+function sauvegarderClient(nom, secteur){
+  if(!nom) return;
+  const adresse = document.getElementById('adresseClient').value.trim();
+  try{
+    let clients = JSON.parse(localStorage.getItem('croisee_clients') || '[]');
+    const idx = clients.findIndex(c => c.nom.toLowerCase() === nom.toLowerCase());
+    const record = {nom, secteur, adresse};
+    if(idx >= 0) clients[idx] = record; else clients.push(record);
+    localStorage.setItem('croisee_clients', JSON.stringify(clients));
+    remplirCarnetClients();
+  }catch(e){}
+}
+
+function remplirCarnetClients(){
+  const sel = document.getElementById('carnetClients');
+  let clients = [];
+  try{ clients = JSON.parse(localStorage.getItem('croisee_clients') || '[]'); }catch(e){}
+  const current = sel.value;
+  sel.innerHTML = '<option value="">— Nouveau client —</option>' +
+    clients.map((c,i) => `<option value="${i}">${c.nom}</option>`).join('');
+  sel.value = current;
+}
+
+function chargerClient(){
+  const sel = document.getElementById('carnetClients');
+  if(sel.value === '') return;
+  try{
+    const clients = JSON.parse(localStorage.getItem('croisee_clients') || '[]');
+    const c = clients[parseInt(sel.value,10)];
+    if(!c) return;
+    document.getElementById('clientNom').value = c.nom || '';
+    document.getElementById('secteur').value = c.secteur || '';
+    document.getElementById('adresseClient').value = c.adresse || '';
+    marquerObsolete();
+  }catch(e){}
+}
+
+// ---------- Envoi email ----------
+// ---------- Génération PDF (vrai gabarit, pas une capture d'écran) ----------
+function hexToRgb(hex){
+  const clean = (hex || '#3F63FF').replace('#','');
+  const bigint = parseInt(clean, 16);
+  return { r:(bigint>>16)&255, g:(bigint>>8)&255, b:bigint&255 };
+}
+function chargerImage(dataUrl){
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = dataUrl;
+  });
+}
+
+async function genererPDFBlob(){
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF('p','mm','a4');
+  const pageW = 210, pageH = 297, marginX = 16, usableW = pageW - marginX*2;
+  const accent = hexToRgb(document.getElementById('entrepriseCouleur').value);
+  const ink = [20,23,31], mid = [91,100,114], line = [225,229,236];
+  let y = 18;
+
+  const eNom = document.getElementById('entrepriseNom').value.trim() || 'Vitrio';
+  const eAdresse = document.getElementById('entrepriseAdresse').value.trim();
+  const eSiret = document.getElementById('entrepriseSiret').value.trim();
+  const eTel = document.getElementById('entrepriseTelephone').value.trim();
+  const eEmail = document.getElementById('entrepriseEmail').value.trim();
+
+  // En-tête : logo à gauche, coordonnées entreprise à droite
+  let logoBottom = y;
+  try{
+    const logoData = localStorage.getItem('croisee_logo');
+    if(logoData){
+      const img = await chargerImage(logoData);
+      const maxW = 34, maxH = 16;
+      let w = maxW, h = maxW * (img.height/img.width);
+      if(h > maxH){ h = maxH; w = maxH * (img.width/img.height); }
+      pdf.addImage(logoData, marginX, y, w, h);
+      logoBottom = y + h;
+    }
+  }catch(e){}
+
+  pdf.setFont('helvetica','bold'); pdf.setFontSize(13); pdf.setTextColor(...ink);
+  pdf.text(eNom, pageW - marginX, y + 4, {align:'right'});
+  pdf.setFont('helvetica','normal'); pdf.setFontSize(8.5); pdf.setTextColor(...mid);
+  let infoY = y + 9;
+  [eAdresse, eSiret ? `SIRET ${eSiret}` : '', [eTel, eEmail].filter(Boolean).join('  ·  ')]
+    .filter(Boolean).forEach(txt => { pdf.text(txt, pageW - marginX, infoY, {align:'right'}); infoY += 4.2; });
+
+  y = Math.max(logoBottom, infoY) + 6;
+  pdf.setDrawColor(...accent); pdf.setLineWidth(0.8);
+  pdf.line(marginX, y, pageW - marginX, y);
+  y += 9;
+
+  // Titre + méta devis
+  pdf.setFont('helvetica','bold'); pdf.setFontSize(19); pdf.setTextColor(...ink);
+  pdf.text('DEVIS', marginX, y);
+  pdf.setFont('helvetica','normal'); pdf.setFontSize(9.5); pdf.setTextColor(...mid);
+  const validite = new Date(currentDevisDate); validite.setDate(validite.getDate() + 30);
+  pdf.text(`N° ${currentDevisNumero}`, marginX, y + 6);
+  pdf.text(`Émis le ${currentDevisDate.toLocaleDateString('fr-FR')}  ·  Valable jusqu'au ${validite.toLocaleDateString('fr-FR')}`, marginX, y + 11);
+  if(currentPrestataire) pdf.text(`Préparé par ${currentPrestataire}`, marginX, y + 16);
+  y += 24;
+
+  // Encart client
+  const nomClient = document.getElementById('clientNom').value.trim() || 'Client';
+  const typeClient = document.querySelector('input[name=typeClient]:checked').value;
+  const secteur = document.getElementById('secteur').value.trim();
+  const adresseClient = document.getElementById('adresseClient').value.trim();
+  const boxH = adresseClient ? 21 : 16;
+  pdf.setFillColor(238,241,246);
+  pdf.roundedRect(marginX, y, usableW, boxH, 2, 2, 'F');
+  pdf.setFont('helvetica','bold'); pdf.setFontSize(10.5); pdf.setTextColor(...ink);
+  pdf.text(nomClient, marginX + 5, y + 7);
+  pdf.setFont('helvetica','normal'); pdf.setFontSize(9); pdf.setTextColor(...mid);
+  pdf.text(`${typeClient === 'particulier' ? 'Particulier' : 'Professionnel'}${secteur ? '  ·  ' + secteur : ''}`, marginX + 5, y + 12.5);
+  if(adresseClient) pdf.text(adresseClient, marginX + 5, y + 17.5);
+  y += boxH + 10;
+
+  const nouvellePageSiNecessaire = (marge) => {
+    if(y > pageH - marge){ pdf.addPage(); y = 20; }
+  };
+
+  // Tableau des lignes
+  pdf.setFont('helvetica','bold'); pdf.setFontSize(8.5); pdf.setTextColor(...mid);
+  pdf.text('DÉSIGNATION', marginX, y);
+  pdf.text('MONTANT', pageW - marginX, y, {align:'right'});
+  y += 2.5;
+  pdf.setDrawColor(...line); pdf.setLineWidth(0.3);
+  pdf.line(marginX, y, pageW - marginX, y);
+  y += 6;
+
+  pdf.setFont('helvetica','normal'); pdf.setFontSize(9.5);
+  (window.lastItems || []).forEach(([label, amount], idx) => {
+    nouvellePageSiNecessaire(20);
+    if(idx % 2 === 1){
+      pdf.setFillColor(248,249,252);
+      pdf.rect(marginX - 2, y - 4.5, usableW + 4, 6.5, 'F');
+    }
+    pdf.setTextColor(...ink);
+    pdf.text(String(label), marginX, y);
+    pdf.text(euros(amount), pageW - marginX, y, {align:'right'});
+    y += 6.5;
+  });
+
+  y += 4;
+  pdf.setDrawColor(...line);
+  pdf.line(marginX, y, pageW - marginX, y);
+  y += 10;
+
+  // Résultats par fréquence
+  (window.lastFreqResults || []).forEach(f => {
+    nouvellePageSiNecessaire(28);
+    pdf.setFont('helvetica','bold'); pdf.setFontSize(11.5); pdf.setTextColor(...ink);
+    pdf.text(f.label, marginX, y);
+    pdf.setTextColor(...accent);
+    pdf.text(euros(f.ttc), pageW - marginX, y, {align:'right'});
+    y += 6;
+    if(f.tauxTVA > 0){
+      pdf.setFont('helvetica','normal'); pdf.setFontSize(8); pdf.setTextColor(...mid);
+      pdf.text(`dont HT : ${euros(f.ht)}  ·  TVA (${f.tauxTVA}%) : ${euros(f.tva)}`, marginX, y);
+      y += 5;
+    }
+    y += 3;
+  });
+  y += 3;
+
+  // Mentions légales
+  const mentionsText = (document.getElementById('mentionsAffichees').textContent || '').trim();
+  if(mentionsText){
+    nouvellePageSiNecessaire(30);
+    pdf.setFont('helvetica','normal'); pdf.setFontSize(7.5); pdf.setTextColor(...mid);
+    const lignes = pdf.splitTextToSize(mentionsText, usableW);
+    pdf.text(lignes, marginX, y);
+    y += lignes.length * 3.6 + 8;
+  }
+
+  // Signature
+  if(typeof sigHasContent !== 'undefined' && sigHasContent){
+    nouvellePageSiNecessaire(40);
+    pdf.setFont('helvetica','bold'); pdf.setFontSize(9); pdf.setTextColor(...ink);
+    pdf.text("Signature de l'entreprise", marginX, y);
+    y += 4;
+    try{
+      const sigCanvas = document.getElementById('sigCanvas');
+      pdf.addImage(sigCanvas.toDataURL('image/png'), marginX, y, 55, 20);
+    }catch(e){}
+  }
+
+  return pdf.output('blob');
+}
+
+function telechargerBlob(blob, filename){
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+// ---------- Envoi email (avec pièce jointe PDF si le partage natif le permet) ----------
+async function envoyerEmail(){
+  const statusEl = document.getElementById('actionStatus');
+  if(!window.lastFreqResults || window.lastFreqResults.length === 0){
+    toast("Calculez d'abord le devis avant de l'envoyer.", 'error');
+    return;
+  }
+  const filename = `${currentDevisNumero || 'devis'}.pdf`;
+  const subject = `Devis ${currentDevisNumero} — ${window.lastClientNom || 'client'}`;
+  const bodyCourt = `Bonjour,\n\nVeuillez trouver ci-joint le devis ${currentDevisNumero}.\n\nCordialement.`;
+
+  const pdfDisponible = typeof window.jspdf !== 'undefined';
+
+  if(pdfDisponible){
+    statusEl.textContent = 'Préparation du PDF...';
+    statusEl.style.color = 'var(--text-mid)';
+    try{
+      const blob = await genererPDFBlob();
+      const file = new File([blob], filename, {type:'application/pdf'});
+
+      if(navigator.canShare && navigator.canShare({files:[file]})){
+        try{
+          await navigator.share({files:[file], title:subject, text:bodyCourt});
+          statusEl.textContent = '';
+          toast('Devis partagé avec le PDF en pièce jointe.', 'success');
+          marquerStatutDevis('envoyé');
+          return;
+        }catch(shareErr){
+          // Annulé par l'utilisateur ou échec du partage : on continue vers le repli ci-dessous
+        }
+      }
+
+      // Pas de partage de fichier natif possible sur cet appareil/navigateur :
+      // on télécharge le PDF et on ouvre l'email avec une consigne claire pour le joindre à la main.
+      telechargerBlob(blob, filename);
+      statusEl.textContent = `PDF "${filename}" téléchargé — joignez-le manuellement à l'email qui va s'ouvrir (mailto: ne peut pas joindre de fichier automatiquement).`;
+      statusEl.style.color = '#16A34A';
+      toast('PDF téléchargé — à joindre manuellement.', 'success');
+      marquerStatutDevis('envoyé');
+    }catch(e){
+      statusEl.textContent = '';
+      toast("Le PDF n'a pas pu être généré — l'email s'ouvrira sans pièce jointe.", 'error');
+    }
+  }
+
+  let bodyDetaille = bodyCourt + '\n\n';
+  (window.lastItems || []).forEach(([label, amount]) => { bodyDetaille += `${label} : ${euros(amount)}\n`; });
+  bodyDetaille += '\n';
+  window.lastFreqResults.forEach(f => {
+    bodyDetaille += `${f.label} : ${euros(f.ttc)}`;
+    if(f.tauxTVA > 0) bodyDetaille += ` (dont HT : ${euros(f.ht)} · TVA ${f.tauxTVA}% : ${euros(f.tva)})`;
+    bodyDetaille += '\n';
+  });
+  const mentions = document.getElementById('mentionsLegales').value.trim();
+  if(mentions) bodyDetaille += `\n${mentions}\n`;
+
+  // Garde-fou : les liens mailto: échouent silencieusement au-delà d'environ 2000 caractères
+  const corpsFinal = bodyDetaille.length < 1500 ? bodyDetaille : bodyCourt;
+  window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(corpsFinal)}`;
+}
+
+// ---------- Export PDF ----------
+async function exporterPDF(){
+  const statusEl = document.getElementById('actionStatus');
+  if(typeof window.jspdf === 'undefined'){
+    toast("Le module PDF n'a pas pu se charger (connexion internet requise). Utilisez « Imprimer » à la place.", 'error');
+    return;
+  }
+  statusEl.textContent = 'Génération du PDF...';
+  statusEl.style.color = 'var(--text-mid)';
+  try{
+    const blob = await genererPDFBlob();
+    telechargerBlob(blob, `${currentDevisNumero || 'devis'}.pdf`);
+    statusEl.textContent = '';
+    toast('PDF téléchargé.', 'success');
+  }catch(e){
+    statusEl.textContent = '';
+    toast("Échec de l'export PDF. Utilisez le bouton « Imprimer » à la place.", 'error');
+  }
+}
+
+// ---------- Signature électronique ----------
+let sigCtx, sigDrawing = false, sigHasContent = false;
+
+function initSignature(){
+  const canvas = document.getElementById('sigCanvas');
+  const ratio = window.devicePixelRatio || 1;
+  canvas.width = canvas.offsetWidth * ratio;
+  canvas.height = canvas.offsetHeight * ratio;
+  sigCtx = canvas.getContext('2d');
+  sigCtx.scale(ratio, ratio);
+  sigCtx.strokeStyle = '#14171F';
+  sigCtx.lineWidth = 2;
+  sigCtx.lineCap = 'round';
+
+  function pos(e){
+    const rect = canvas.getBoundingClientRect();
+    const t = e.touches ? e.touches[0] : e;
+    return {x: t.clientX - rect.left, y: t.clientY - rect.top};
+  }
+  function start(e){ sigDrawing = true; sigHasContent = true; const p = pos(e); sigCtx.beginPath(); sigCtx.moveTo(p.x,p.y); e.preventDefault(); }
+  function move(e){ if(!sigDrawing) return; const p = pos(e); sigCtx.lineTo(p.x,p.y); sigCtx.stroke(); e.preventDefault(); }
+  function end(){ sigDrawing = false; }
+
+  canvas.addEventListener('mousedown', start);
+  canvas.addEventListener('mousemove', move);
+  window.addEventListener('mouseup', end);
+  canvas.addEventListener('touchstart', start, {passive:false});
+  canvas.addEventListener('touchmove', move, {passive:false});
+  canvas.addEventListener('touchend', end);
+}
+
+function effacerSignature(){
+  const canvas = document.getElementById('sigCanvas');
+  if(sigCtx) sigCtx.clearRect(0,0,canvas.width,canvas.height);
+  sigHasContent = false;
+  document.getElementById('sigStatus').textContent = '';
+}
+
+function validerSignature(){
+  const statusEl = document.getElementById('sigStatus');
+  if(!sigHasContent){
+    statusEl.textContent = 'Veuillez signer dans le cadre ci-dessus avant de valider.';
+    statusEl.style.color = '#D64545';
+    return;
+  }
+  const now = new Date();
+  statusEl.innerHTML = `<span class="icon icon-check"></span> Devis signé par l'entreprise le ${now.toLocaleDateString('fr-FR')} à ${now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}.`;
+  statusEl.style.color = '#16A34A';
+  toast('Devis signé.', 'success');
+  marquerStatutDevis('signé');
+}
+
+// ---------- Initialisation ----------
+DEFAULT_QUOTE_STATE = serializeContainer('quoteForm');
+genererNumeroDevis();
+chargerParametres();
+remplirCarnetClients();
+chargerPrestataires();
+afficherHistorique();
+initSignature();
+activerCompteursQuantite();
+calculer();
+activerDetectionObsolete();
+marquerAJour();
+
+try{
+  const dernier = localStorage.getItem('croisee_dernier_prestataire');
+  if(dernier){
+    currentPrestataire = dernier;
+    afficherPrestataireTopbar();
+    document.getElementById('screen-identify').style.display = 'none';
+    document.getElementById('screen-home').style.display = 'flex';
+  }
+}catch(e){}
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+</script>
+
+</body>
+</html>
