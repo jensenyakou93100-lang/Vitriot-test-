@@ -1,0 +1,50 @@
+# ─────────────────────────────────────────────────────────────
+#  Identité de Divine Nettoyage
+#  Tout ce qui concerne la marque se change ICI, jamais dans le code.
+# ─────────────────────────────────────────────────────────────
+
+entreprise:
+  nom: "Divine Nettoyage"
+  telephone: "06 99 14 25 08"
+  site: "divinenettoyage.fr"
+  zone: "Val-d'Oise (95), Île-de-France et Oise (60)"
+
+couleurs:
+  brun:  "#3A2A1C"   # texte principal, fond de la carte de fin
+  or:    "#C3982F"   # accent, chiffres, prix, mot prononcé
+  bleu:  "#1B4C66"   # second accent
+  creme: "#FBF5EA"   # fonds clairs
+  blanc: "#FFFFFF"
+
+# Fichiers dans le dossier ./polices/
+polices:
+  titre: "Fraunces-ExtraBold.ttf"        # accroches, gros titres
+  titre_moyen: "Fraunces-SemiBold.ttf"
+  texte: "Inter-SemiBold.ttf"            # sous-titres, infos
+  texte_gras: "Inter-ExtraBold.ttf"      # numéro de téléphone
+
+# Le motif ✦ est dessiné par l'outil (étoile à quatre branches),
+# pour être identique sur tous les ordinateurs.
+motif: "✦"
+
+tarifs:
+  vitre_par_fenetre: 8
+  minimum_facturation: 50
+  pavillon_fenetres: 15
+  pavillon_prix: 120
+  pavillon_prix_apres_credit: 60
+  fenetre_apres_credit: 4
+
+credit_impot:
+  # ⚠️ À confirmer : n'activez ceci que si vous êtes déclaré
+  # organisme de services à la personne (SAP).
+  autorise: true
+  mention_legale: "Crédit d'impôt de 50 % selon l'article 199 sexdecies du CGI, sous réserve de la législation en vigueur."
+
+carte_fin:
+  duree: 2.0
+  lignes:
+    - { texte: "Divine Nettoyage",         style: titre }
+    - { texte: "Devis gratuit sous 24 h",  style: info }
+    - { texte: "06 99 14 25 08",           style: telephone }
+    - { texte: "divinenettoyage.fr",       style: site }

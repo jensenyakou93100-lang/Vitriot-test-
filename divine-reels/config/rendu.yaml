@@ -1,0 +1,37 @@
+# ─────────────────────────────────────────────────────────────
+#  Réglages techniques du rendu
+# ─────────────────────────────────────────────────────────────
+
+format:
+  largeur: 1080
+  hauteur: 1920
+  images_par_seconde: 30
+
+# Zones mortes d'Instagram / Reels : aucun texte de l'outil n'a le droit d'y entrer.
+zones_sures:
+  haut: 250      # pixels réservés en haut (interface Instagram)
+  bas: 420       # pixels réservés en bas (légende, boutons, « En savoir plus »)
+  marge_cotes: 60
+
+duree:
+  minimum: 15
+  maximum: 45
+
+encodage:
+  preset: "medium"       # compromis vitesse / qualité sur un processeur ordinaire
+  crf: 20                # qualité (plus bas = plus beau et plus lourd)
+  debit_max: "12M"       # plafond : 45 s × 12 Mb/s ≈ 68 Mo, donc toujours < 100 Mo
+  audio_debit: "192k"
+  audio_frequence: 48000
+
+audio:
+  loudness_cible: -14    # LUFS, niveau conseillé pour Instagram / Facebook
+  crete_max: -1.0        # dBFS, au-dessus = saturation
+
+verification:
+  taille_max_mo: 100
+  crete_refus: -0.1      # dBFS : au-delà, le son est considéré comme saturé
+
+inventaire:
+  seuil_flou: 60         # netteté minimale (plus bas = plus flou)
+  seuil_silence: -50     # dB de volume moyen : en dessous, rush considéré muet

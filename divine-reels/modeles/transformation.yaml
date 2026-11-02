@@ -1,0 +1,14 @@
+# Modèle « transformation » — le plus rentable
+# Avant → geste technique → après → prix → appel à l'action.
+
+nom: transformation
+description: "Avant / après d'une vitre ou d'un textile, avec le prix et le crédit d'impôt."
+
+# Ordre des plans, d'après le préfixe des fichiers (avant_..., geste_..., apres_...).
+# Les fichiers sans préfixe reconnu passent à la fin, dans l'ordre alphabétique.
+ordre_plans: [accroche, avant, geste, apres, face, autre]
+
+accroches:
+  - "Regarde ce que 10 ans de pluie font à une vitre."
+  - "La cliente pensait que c'était rayé."
+  - "15 fenêtres. 2 heures. Regarde."

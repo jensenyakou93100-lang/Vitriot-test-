@@ -1,0 +1,8 @@
+# Fichiers produits par l'outil (jamais dans le dépôt)
+sorties/
+.cache/
+erreur.log
+__pycache__/
+# Vos musiques restent sur votre ordinateur
+musique/*
+!musique/.gitkeep
