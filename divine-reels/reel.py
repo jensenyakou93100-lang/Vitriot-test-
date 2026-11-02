@@ -15,7 +15,7 @@ RACINE = Path(__file__).resolve().parent
 sys.path.insert(0, str(RACINE))
 
 from divine_reels import config, ffmpeg, inventaire, montage, verification  # noqa: E402
-from divine_reels.cache import empreinte  # noqa: E402
+from divine_reels.cache import empreinte, empreinte_code, empreinte_fichier  # noqa: E402
 from divine_reels.erreurs import ErreurDivine, RenduRefuse  # noqa: E402
 
 
@@ -62,7 +62,11 @@ def principal():
     final = dossier_sortie / f"{modele['nom']}_base.mp4"
 
     # Idempotence : si rien n'a changé (rushes, modèle, réglages), on ne refait rien.
-    cle = empreinte([r.empreinte for r in rushes], modele, cfg.marque, cfg.rendu, montage.VERSION)
+    voix = inventaire.trouver_voix(args.rushes)
+    if voix:
+        print(f"🎙️  Voix-off trouvée : {voix.name}")
+    cle = empreinte([r.empreinte for r in rushes], voix and empreinte_fichier(voix), modele, cfg.marque, cfg.rendu,
+                    empreinte_code())
     fichier_cle = final.with_name("." + final.name + ".cle")
     if final.exists() and fichier_cle.exists() and fichier_cle.read_text() == cle:
         print(f"✅ Déjà à jour, rien à refaire : {final}")
@@ -70,9 +74,15 @@ def principal():
 
     debut = time.time()
     print(f"🎬 Montage « {modele['nom']} » : {len(rushes)} rush(es) + carte de fin…")
-    resultat = montage.assembler(rushes, cfg, final)
+    resultat = montage.assembler(rushes, cfg, final, voix)
     for c in resultat["coupes"]:
-        print(f"   ✂️  trop long pour tenir en {cfg.rendu['duree']['maximum']} s : {c}")
+        print(f"   ✂️  non utilisé faute de place : {c}")
+    for a in resultat["alertes"]:
+        print(f"   ⚠️  {a}")
+    if resultat["mots"]:
+        print(f"   💬 Sous-titres : {resultat['mots']} mots en {resultat['groupes']} groupes")
+    else:
+        print("   💬 Aucune parole détectée : pas de sous-titres (ajoutez une voix-off « voix.m4a » dans le dossier)")
 
     print("🔎 Vérification du rendu…")
     problemes, mesures = verification.verifier(resultat["temporaire"], cfg, resultat["boites"])

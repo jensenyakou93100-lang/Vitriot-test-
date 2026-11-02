@@ -35,3 +35,25 @@ verification:
 inventaire:
   seuil_flou: 60         # netteté minimale (plus bas = plus flou)
   seuil_silence: -50     # dB de volume moyen : en dessous, rush considéré muet
+
+transcription:
+  modele: "small"        # faster-whisper, en local, sur le processeur
+  # Mots que Whisper doit savoir écrire correctement
+  vocabulaire: "Divine Nettoyage, canapé, vitres, injecteur-extracteur, crédit d'impôt, devis gratuit, Val-d'Oise."
+
+sous_titres:
+  police: "texte_gras"   # rôle de police défini dans marque.yaml
+  taille: 96
+  contour: 8             # contour noir épais : lisible sur tous les fonds
+  ombre: 3
+  bas_du_texte: 1420     # tiers inférieur, au-dessus de la zone morte (1500)
+  mots_min: 2
+  mots_max: 4
+  pause_coupure: 0.35    # une pause plus longue démarre un nouveau groupe de mots
+  tenue_apres: 0.25      # le groupe reste affiché un instant après le dernier mot
+  majuscules: false
+
+voix_off:
+  # Un fichier dont le nom commence par « voix » (voix.m4a, voix_canape.mov…)
+  # est utilisé comme commentaire par-dessus les images.
+  ambiance_db: -18       # bruit des rushes conservé discrètement sous la voix

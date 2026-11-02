@@ -24,3 +24,12 @@ def empreinte(*elements) -> str:
     """Empreinte d'un ensemble de réglages (dictionnaires, textes, empreintes de fichiers)."""
     brut = json.dumps(elements, sort_keys=True, ensure_ascii=False, default=str)
     return hashlib.sha1(brut.encode("utf-8")).hexdigest()[:16]
+
+
+def empreinte_code() -> str:
+    """Empreinte du code de l'outil : après une mise à jour, les rendus finaux sont refaits."""
+    dossier = Path(__file__).resolve().parent
+    h = hashlib.sha1()
+    for f in sorted(dossier.glob("*.py")):
+        h.update(f.read_bytes())
+    return h.hexdigest()[:16]

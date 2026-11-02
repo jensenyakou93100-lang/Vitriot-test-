@@ -1,7 +1,7 @@
 """Assemblage : rushes mis au format 1080×1920 + carte de fin."""
 from pathlib import Path
 
-from . import cartons, ffmpeg, zones_sures
+from . import cartons, ffmpeg, sous_titres, transcription, zones_sures
 from .cache import empreinte
 from .config import Config
 from .erreurs import ErreurDivine
@@ -71,25 +71,58 @@ def carte_de_fin(cfg: Config) -> tuple[Path, list]:
     return video, zones_sures.lire(boites_json)
 
 
-def assembler(rushes: list[Rush], cfg: Config, sortie: Path) -> dict:
-    """Colle les rushes (dans l'ordre) puis la carte de fin, et encode le fichier final.
+def assembler(rushes: list[Rush], cfg: Config, sortie: Path, voix: Path | None = None) -> dict:
+    """Colle les rushes (dans l'ordre), ajoute voix-off et sous-titres, puis la carte de fin.
     Renvoie ce qu'il faut savoir pour la vérification."""
     duree_fin = cfg.marque["carte_fin"]["duree"]
     budget = cfg.rendu["duree"]["maximum"] - duree_fin - 0.5   # place disponible pour les images
-    morceaux, total, coupes = [], 0.0, []
+    duree_voix = 0.0
+    if voix:
+        duree_voix = ffmpeg.duree(ffmpeg.sonder(voix))
+        if duree_voix > budget:
+            raise ErreurDivine(f"La voix-off dure {duree_voix:.0f} s : c'est trop long. Maximum {budget:.0f} s "
+                               f"(la vidéo fait {cfg.rendu['duree']['maximum']} s, carte de fin comprise).")
+        budget = min(budget, duree_voix + 0.4)
+
+    # 1. Placer les rushes sur la ligne de temps
+    segments, total, coupes = [], 0.0, []
     for rush in rushes:
-        if total >= budget:
+        if total >= budget - 0.05:
             coupes.append(rush.nom)
             continue
         garde = min(rush.duree, budget - total)
-        morceaux.append((normaliser(rush, cfg), garde))
+        segments.append((rush, normaliser(rush, cfg), total, garde))
         if garde < rush.duree - 0.05:
             coupes.append(f"{rush.nom} (raccourci à {garde:.1f} s)")
         total += garde
+    alertes = []
+    if voix and total < duree_voix:
+        alertes.append(f"pas assez d'images ({total:.1f} s) pour couvrir la voix-off ({duree_voix:.1f} s)")
+
+    # 2. Mots prononcés, recalés sur la ligne de temps
+    if voix:
+        mots = [m for m in transcription.transcrire(voix, cfg) if m.fin <= total]
+    else:
+        mots = []
+        for rush, _, debut, garde in segments:
+            if rush.a_du_son:
+                mots += [m.decale(debut) for m in transcription.transcrire(Path(rush.chemin), cfg) if m.fin <= garde]
+
+    # 3. Sous-titres karaoké
+    boites_st, fichier_ass, groupes = [], None, []
+    if mots:
+        dossier = cfg.dossier_cache / "sous_titres"
+        dossier.mkdir(exist_ok=True)
+        fichier_ass = dossier / f"{empreinte([vars(m) for m in mots], cfg.rendu['sous_titres'], cfg.marque['couleurs'], total)}.ass"
+        groupes = sous_titres.ecrire_ass(mots, cfg, fichier_ass, fin_max=total)
+        boite = sous_titres.mesurer(fichier_ass, cfg, total)
+        if boite:
+            boites_st.append(boite)
 
     video_fin, boites = carte_de_fin(cfg)
-    morceaux.append((video_fin, duree_fin))
+    morceaux = [(f, g) for _, f, _, g in segments] + [(video_fin, duree_fin)]
 
+    # 4. Graphe ffmpeg
     entrees, filtres, etiquettes = [], [], []
     for i, (fichier, duree) in enumerate(morceaux):
         entrees += ["-i", fichier]
@@ -98,8 +131,22 @@ def assembler(rushes: list[Rush], cfg: Config, sortie: Path) -> dict:
         etiquettes.append(f"[v{i}][a{i}]")
     a = cfg.rendu["audio"]
     freq = cfg.rendu["encodage"]["audio_frequence"]
-    graphe = ";".join(filtres) + ";" + "".join(etiquettes) + f"concat=n={len(morceaux)}:v=1:a=1[v][a0];" \
-        f"[a0]loudnorm=I={a['loudness_cible']}:TP={a['crete_max'] - 0.5}:LRA=11,aresample={freq}[a]"
+    graphe = ";".join(filtres) + ";" + "".join(etiquettes) + f"concat=n={len(morceaux)}:v=1:a=1[vc][ac]"
+    if fichier_ass:
+        polices = sous_titres.chemin_filtre(cfg.racine / "polices")
+        graphe += f";[vc]ass='{sous_titres.chemin_filtre(fichier_ass)}':fontsdir='{polices}'[v]"
+    else:
+        graphe += ";[vc]null[v]"
+    if voix:
+        k = len(morceaux)
+        entrees += ["-i", voix]
+        graphe += (f";[{k}:a:0]aresample={freq},aformat=channel_layouts=stereo,"
+                   f"atrim=0:{total:.3f},apad=whole_dur={total + duree_fin:.3f}[vx]"
+                   f";[ac]volume={cfg.rendu['voix_off']['ambiance_db']}dB[amb]"
+                   f";[amb][vx]amix=inputs=2:duration=first:normalize=0[am]")
+    else:
+        graphe += ";[ac]anull[am]"
+    graphe += f";[am]loudnorm=I={a['loudness_cible']}:TP={a['crete_max'] - 0.5}:LRA=11,aresample={freq}[a]"
 
     enc = cfg.rendu["encodage"]
     temporaire = sortie.with_name(sortie.stem + ".en-cours.mp4")
@@ -110,5 +157,5 @@ def assembler(rushes: list[Rush], cfg: Config, sortie: Path) -> dict:
         "-c:a", "aac", "-b:a", enc["audio_debit"], "-ar", freq, "-ac", 2,
         "-movflags", "+faststart", temporaire,
     ], "encodage de la vidéo finale")
-    return {"temporaire": temporaire, "boites": boites, "coupes": coupes,
-            "duree_images": round(total, 2)}
+    return {"temporaire": temporaire, "boites": boites + boites_st, "coupes": coupes, "alertes": alertes,
+            "duree_images": round(total, 2), "mots": len(mots), "groupes": len(groupes), "ass": fichier_ass}

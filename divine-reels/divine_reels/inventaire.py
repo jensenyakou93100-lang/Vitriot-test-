@@ -14,6 +14,20 @@ from .config import Config
 from .erreurs import ErreurDivine
 
 EXTENSIONS = {".mp4", ".mov", ".m4v"}
+EXTENSIONS_VOIX = EXTENSIONS | {".m4a", ".mp3", ".wav", ".aac"}
+
+
+def est_voix(p: Path) -> bool:
+    return p.stem.lower().startswith("voix") and p.suffix.lower() in EXTENSIONS_VOIX
+
+
+def trouver_voix(dossier: Path) -> Path | None:
+    """Fichier de voix-off éventuel (nom commençant par « voix »)."""
+    voix = sorted(p for p in Path(dossier).iterdir() if est_voix(p))
+    if len(voix) > 1:
+        raise ErreurDivine("Plusieurs fichiers de voix-off : " + ", ".join(p.name for p in voix)
+                           + ". Gardez-en un seul dans le dossier.")
+    return voix[0] if voix else None
 
 
 @dataclass
@@ -108,7 +122,7 @@ def inventorier(dossier: Path, cfg: Config) -> list[Rush]:
     dossier = Path(dossier)
     if not dossier.is_dir():
         raise ErreurDivine(f"Dossier de rushes introuvable : {dossier}")
-    fichiers = sorted(p for p in dossier.iterdir() if p.suffix.lower() in EXTENSIONS and not p.name.startswith("."))
+    fichiers = sorted(p for p in dossier.iterdir() if p.suffix.lower() in EXTENSIONS and not p.name.startswith(".") and not est_voix(p))
     if not fichiers:
         raise ErreurDivine(f"Aucune vidéo (.mp4, .mov) dans {dossier}")
     return [analyser_rush(p, cfg) for p in fichiers]
