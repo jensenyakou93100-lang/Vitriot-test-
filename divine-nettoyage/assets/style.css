@@ -566,3 +566,10 @@ p{ margin:0; }
 .legal p{ color:var(--ink-2); }
 .legal p + p{ margin-top:10px; }
 .legal a{ color:var(--gold-ink); text-decoration:underline; text-underline-offset:3px; }
+
+/* ouverture sans photo (page Tapis, en attendant une vraie photo) */
+.hero.no-photo{ background:
+  radial-gradient(60% 80% at 85% 20%, rgba(195,152,47,.28), transparent 70%),
+  radial-gradient(50% 60% at 10% 100%, rgba(195,152,47,.14), transparent 70%),
+  linear-gradient(160deg, #2A1E14 0%, #120E0A 70%); }
+.hero.no-photo::after{ display:none; }

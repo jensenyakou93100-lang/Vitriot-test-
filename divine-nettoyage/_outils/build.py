@@ -197,8 +197,8 @@ def page(fname, title, desc, body, current=None, light=False, extra_head='', jso
 # ---------------------------------------------------------------- blocs réutilisables
 def hero_page(img, crumb, tag, h1, lede, pos='50% 40%', cta_label='Demander un devis', cta_href='devis.html'):
     return f'''
-<section class="hero page-hero">
-  <div class="hero-media" style="--pos:{pos}"><img src="images/{img}" alt="" fetchpriority="high"></div>
+<section class="hero page-hero{' no-photo' if not img else ''}">
+  {'' if not img else f'<div class="hero-media" style="--pos:{pos}"><img src="images/{img}" alt="" fetchpriority="high"></div>'}
   <div class="wrap">
     <nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a><i>›</i><span aria-current="page">{crumb}</span></nav>
     <span class="pill-tag">{tag}</span>
@@ -452,7 +452,7 @@ home = f'''
       <a class="scard reveal" href="nettoyage-matelas.html"><div class="ph"><img src="images/avant-apres-matelas.jpg" alt="Matelas taché avant et après nettoyage" loading="lazy" style="object-position:70% 50%"></div>
         <div class="tx"><h3>Matelas</h3><p>Auréoles, transpiration, acariens. Désinfection comprise.</p>
         <div class="row"><span class="from">dès 70 €<small>au lieu de 140 €</small></span><span class="go">{ic('chev')}</span></div></div></a>
-      <a class="scard reveal" href="nettoyage-tapis.html"><div class="ph"><img src="images/canape-modulable.jpg" alt="Canapé modulable et tapis clair après nettoyage" loading="lazy"></div>
+      <a class="scard reveal" href="nettoyage-tapis.html"><div class="ph"><img src="images/tapis-detail.jpg" alt="Tapis à motifs gris après nettoyage" loading="lazy"></div>
         <div class="tx"><h3>Tapis</h3><p>Laine, synthétique, moquettes. Les couleurs d'origine ressortent.</p>
         <div class="row"><span class="from">dès 50 €<small>au lieu de 100 €</small></span><span class="go">{ic('chev')}</span></div></div></a>
     </div>
@@ -748,7 +748,7 @@ tapis_extra = f'''
 </section>'''
 textile_page('nettoyage-tapis.html', 'Nettoyage de tapis', 'Tapis', 'Nettoyage de tapis à domicile.',
     "À partir de 50 € après crédit d'impôt. L'injection-extraction ravive les couleurs sans agresser les fibres, à condition de tester la tenue des teintes avant de commencer.",
-    'canape-modulable.jpg', '50% 70%',
+    None, '50% 50%',
     "Un tapis encaisse tout : le passage, la poussière, les taches. Je teste la fibre sur un coin, j'aspire énergiquement la saleté sèche, je détache et brosse, puis j'injecte de l'eau claire que je réaspire aussitôt. Les couleurs ressortent, le tapis n'est pas gorgé d'eau.",
     "Ce qu'un tapis retient.",
     [('home', 'Saleté de passage', "La poussière s'accumule à la base de la fibre et ternit la couleur bien avant qu'on voie une tache."),
