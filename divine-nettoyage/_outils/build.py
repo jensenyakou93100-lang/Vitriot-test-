@@ -383,7 +383,7 @@ BUSINESS = {
     "url": SITE + "/", "email": MAIL, "telephone": "+33699142508", "image": SITE + "/images/partage.jpg",
     "logo": SITE + "/images/icon-512.png", "priceRange": "€€", "currenciesAccepted": "EUR",
     "paymentAccepted": "Carte bancaire, virement, espèces",
-    "address": {"@type": "PostalAddress", "addressRegion": "Île-de-France", "addressCountry": "FR"},
+    "address": {"@type": "PostalAddress", "streetAddress": "16 rue de la Fontaine Hurée", "addressLocality": "Ronquerolles", "postalCode": "95340", "addressRegion": "Île-de-France", "addressCountry": "FR"},
     "areaServed": [{"@type": "AdministrativeArea", "name": d} for d in ZONES.keys()],
     "aggregateRating": {"@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "43"},
     "sameAs": [IG, FB, TT],
