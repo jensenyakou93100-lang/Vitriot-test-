@@ -461,6 +461,17 @@ home = f'''
 
 {taxcard()}
 
+<section class="section band">
+  <div class="wrap">
+    <div class="shead center"><span class="eyebrow">Avant / après</span><h2>La différence se voit.</h2><p>Des interventions récentes, photographiées avant et après notre passage.</p></div>
+    <div class="ba">
+      <figure class="reveal"><img src="images/avant-apres-canape-beige.jpg" alt="Canapé beige taché avant nettoyage, puis le même canapé propre après injection-extraction" loading="lazy"><figcaption>Canapé tissu beige, taches d'assise<span class="mono">Avant / Après</span></figcaption></figure>
+      <figure class="reveal"><img src="images/avant-apres-matelas.jpg" alt="Matelas d'enfant taché avant et après nettoyage" loading="lazy"><figcaption>Matelas enfant<span class="mono">Avant / Après</span></figcaption></figure>
+    </div>
+    <p class="center-link" style="margin-top:32px"><a href="nettoyage-canape.html" style="color:var(--ink-2)">Voir nos canapés nettoyés {ic('chev')}</a></p>
+  </div>
+</section>
+
 <section class="strip" aria-label="Nos interventions en images">
   <figure><img src="images/vitres-hauteur.jpg" alt="Lavage de vitres en hauteur à la perche télescopique" loading="lazy"><figcaption><span class="mono">Vitres</span>Perche à eau pure, jusqu'au 2e étage</figcaption></figure>
   <figure><img src="images/canape-angle-injection.jpg" alt="Jensen nettoie un canapé d'angle à l'injection-extraction" loading="lazy">
@@ -616,8 +627,9 @@ canape_gallery = f'''
   <div class="wrap">
     <div class="shead"><span class="eyebrow">Avant / après</span><h2>La différence se voit.</h2></div>
     <div class="ba">
+      <figure class="reveal"><img src="images/avant-apres-canape-beige.jpg" alt="Canapé beige taché avant nettoyage, puis le même canapé propre après injection-extraction" loading="lazy"><figcaption>Canapé tissu beige, taches d'assise<span class="mono">Avant / Après</span></figcaption></figure>
       <figure class="reveal"><img src="images/avant-apres-canape.jpg" alt="Canapé en velours côtelé avant et après nettoyage" loading="lazy"><figcaption>Canapé velours côtelé<span class="mono">Avant / Après</span></figcaption></figure>
-      <figure class="reveal"><img src="images/canape-velours.jpg" alt="Canapé d'angle en velours côtelé après nettoyage" loading="lazy" style="aspect-ratio:1200/773;object-fit:cover;width:100%"><figcaption>Canapé d'angle velours<span class="mono">Après</span></figcaption></figure>
+
     </div>
     <div class="gallery" style="margin-top:16px">
       <figure class="reveal"><img src="images/canape-bleu.jpg" alt="Canapé d'angle bleu nettoyé par injection-extraction" loading="lazy"><figcaption><span class="mono">Particulier</span>Canapé d'angle bleu</figcaption></figure>

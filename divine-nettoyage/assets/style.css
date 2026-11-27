@@ -419,6 +419,7 @@ p{ margin:0; }
 
 .ba{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; }
 .ba figure{ margin:0; background:var(--card); border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden; }
+.ba img{ width:100%; aspect-ratio:3/2; object-fit:cover; }
 .ba figcaption{ padding:16px 20px; display:flex; justify-content:space-between; gap:12px; align-items:center; font-weight:500; }
 .ba figcaption .mono{ color:var(--gold-ink); font-size:.62rem; }
 
