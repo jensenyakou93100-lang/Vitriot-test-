@@ -11,7 +11,7 @@ GOOGLE = "https://share.google/4LWD04qh5UaOUdYKN"
 IG = "https://www.instagram.com/divinenettoyage"
 FB = "https://www.facebook.com/share/1EhrKePbFw/"
 TT = "https://www.tiktok.com/@divinetextile"
-SIRET = "989 702 543 00020"
+SIRET = "989 702 543 00012"
 SITE = "https://divinenettoyage.fr"
 
 # ---------------------------------------------------------------- icônes
@@ -674,7 +674,7 @@ textile_page('nettoyage-canape.html', 'Nettoyage de canapé', 'Canapé', 'Nettoy
       "Une odeur qui revient signale presque toujours une mousse imprégnée. Un second passage est parfois nécessaire."],
      "Je vous dis sur place ce qui partira et ce qui ne partira pas, avant de commencer. Vous décidez ensuite."),
     canape_extra,
-    [("Combien de temps le canapé met-il à sécher ?", "Entre 4 et 8 heures selon l'épaisseur de la mousse et l'aération de la pièce. Vous pouvez vous rasseoir dessus le soir même."),
+    [("Combien de temps le canapé met-il à sécher ?", "Entre 6 et 12 heures selon l'épaisseur de la mousse et l'aération de la pièce. Si j'interviens le matin, vous pouvez vous rasseoir dessus le soir même."),
      ("Faut-il déplacer le canapé ?", "Non. Je travaille sur place, avec une bâche de protection au sol. Vous n'avez rien à préparer."),
      ("Et si les taches ne partent pas ?", "Je vous le dis avant de commencer. Certaines taches anciennes ou décolorantes ne partent jamais totalement : je préfère vous prévenir plutôt que de vous vendre un miracle."),
      ("Traitez-vous les canapés en cuir ?", "Non. Le cuir et le simili ne se nettoient pas par injection-extraction. Je vous oriente plutôt vers un spécialiste du cuir."),
@@ -721,7 +721,7 @@ textile_page('nettoyage-matelas.html', 'Nettoyage de matelas', 'Matelas', 'Netto
       "Je ne traite ni les matelas déchirés ni ceux dont le coutil est perforé : l'eau entrerait sans ressortir."],
      "Comme toujours, je vous donne mon avis honnête avant de commencer, pas après."),
     '',
-    [("Je peux dormir dessus le soir même ?", "Oui, si j'interviens le matin. Comptez 4 à 6 heures de séchage dans une pièce aérée."),
+    [("Je peux dormir dessus le soir même ?", "Oui, si j'interviens le matin. Comptez 6 à 12 heures de séchage dans une pièce aérée."),
      ("Vous traitez les deux faces ?", "Sur demande. Le plus souvent, seule la face du dessus a besoin d'être traitée."),
      ("Est-ce que ça élimine vraiment les acariens ?", "L'extraction et la désinfection en retirent une grande partie, mais aucun professionnel honnête ne vous promettra une élimination totale et définitive : ils reviennent avec le temps. Un passage par an fait une vraie différence."),
      credit_q],
