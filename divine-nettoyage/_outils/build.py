@@ -911,11 +911,12 @@ ML = f'''
   <div class="wrap wrap-narrow legal">
     <h2>Éditeur du site</h2>
     <p><b>Divine Nettoyage</b>, entreprise de nettoyage de vitres et de textiles.<br>
-    Responsable : Jensen<br>
+    Responsable : Jensen Yakou<br>
     Siège (domiciliation) : 60 rue François 1er, 75008 Paris<br>
+    Base d'intervention : 16 rue de la Fontaine Hurée, 95340 Ronquerolles<br>
     SIRET : {SIRET}<br>
     Téléphone : <a href="{TEL_HREF}">{TEL}</a> · E-mail : <a href="mailto:{MAIL}">{MAIL}</a></p>
-    <p>Directeur de la publication : Jensen.</p>
+    <p>Directeur de la publication : Jensen Yakou.</p>
     <h2>Assurance</h2>
     <p>Responsabilité civile professionnelle souscrite auprès d'ORUS.</p>
     <h2>Hébergement</h2>
