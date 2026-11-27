@@ -134,7 +134,7 @@ def footer():
       </div>
       <div class="fcol"><h4>Prestations</h4><ul>{sv}<li><a href="professionnels.html">Pour les pros</a></li><li><a href="credit-impot.html">Crédit d'impôt 50 %</a></li></ul></div>
       <div class="fcol"><h4>Zones</h4><ul>{zl}</ul></div>
-      <div class="fcol"><h4>Entreprise</h4><ul><li><a href="devis.html">Demander un devis</a></li><li><a href="{GOOGLE}" target="_blank" rel="noopener">Nos avis Google</a></li><li><span>SIRET {SIRET}</span></li><li><span>Assurée ORUS · RC Pro</span></li></ul></div>
+      <div class="fcol"><h4>Entreprise</h4><ul><li><a href="devis.html">Demander un devis</a></li><li><a href="{GOOGLE}" target="_blank" rel="noopener">Nos avis Google</a></li><li><a href="mentions-legales.html">Mentions légales</a></li><li><span>SIRET {SIRET}</span></li><li><span>Assurée ORUS · RC Pro</span></li></ul></div>
     </div>
   </div>
   <div class="wrap"><div class="fbottom"><span>© <span class="yr">2026</span> Divine Nettoyage · Entreprise déclarée et assurée</span><span>Service à la personne · Crédit d'impôt 50 %</span></div></div>
@@ -383,7 +383,7 @@ BUSINESS = {
     "url": SITE + "/", "email": MAIL, "telephone": "+33699142508", "image": SITE + "/images/partage.jpg",
     "logo": SITE + "/images/icon-512.png", "priceRange": "€€", "currenciesAccepted": "EUR",
     "paymentAccepted": "Carte bancaire, virement, espèces",
-    "address": {"@type": "PostalAddress", "addressRegion": "Île-de-France", "addressCountry": "FR"},
+    "address": {"@type": "PostalAddress", "addressLocality": "Ronquerolles", "postalCode": "95340", "addressRegion": "Île-de-France", "addressCountry": "FR"},
     "areaServed": [{"@type": "AdministrativeArea", "name": d} for d in ZONES.keys()],
     "aggregateRating": {"@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "43"},
     "sameAs": [IG, FB, TT],
@@ -464,7 +464,7 @@ home = f'''
 <section class="strip" aria-label="Nos interventions en images">
   <figure><img src="images/vitres-hauteur.jpg" alt="Lavage de vitres en hauteur à la perche télescopique" loading="lazy"><figcaption><span class="mono">Vitres</span>Perche à eau pure, jusqu'au 2e étage</figcaption></figure>
   <figure><img src="images/canape-angle-injection.jpg" alt="Jensen nettoie un canapé d'angle à l'injection-extraction" loading="lazy">
-    <a class="play" href="{TT}" target="_blank" rel="noopener"><span class="disc">{ic('play')}</span><span>Voir nos vidéos</span></a></figure>
+    <a class="play" href="{IG}" target="_blank" rel="noopener"><span class="disc">{ic('play')}</span><span>Voir nos vidéos</span></a></figure>
   <figure><img src="images/abri-piscine.jpg" alt="Nettoyage des vitres d'un abri de piscine" loading="lazy"><figcaption><span class="mono">Vérandas</span>Abri de piscine vitré</figcaption></figure>
 </section>
 
@@ -653,7 +653,7 @@ textile_page('nettoyage-canape.html', 'Nettoyage de canapé', 'Canapé', 'Nettoy
      ('drop', 'Détachage', "Détachants ciblés selon chaque tache, puis brossage mécanisé sur toute l'assise."),
      ('clock', "Temps d'action", "Cinq minutes pour que le produit décolle la saleté incrustée dans la fibre."),
      ('vac', 'Injection-extraction', "Eau claire injectée sous pression puis réaspirée aussitôt, avec la saleté dissoute.")],
-    ("Un prix ferme, annoncé avant de commencer.", "Tarif de départ pour un canapé deux places. Le prix définitif dépend du nombre de places, du tissu et de l'état : il vous est confirmé sur devis, avant toute intervention.",
+    ("Un prix ferme, annoncé avant de commencer.", "Après crédit d'impôt de 50 % : <b>canapé 2 places dès 80 €</b>, <b>3 places dès 90 €</b>, <b>canapé d'angle 5 places et plus dès 99 €</b>. Le prix définitif dépend du tissu et de l'état : il vous est confirmé sur devis, avant toute intervention.",
      "Canapé deux places · à partir de", "160 €", "80 €", "Après crédit d'impôt de 50 %. Déplacement compris dans le prix annoncé."),
     ("Ce que je ne peux pas promettre.", "Un nettoyage professionnel retire la saleté. Il ne refait pas un canapé neuf, et certains dégâts sont définitifs. Je préfère le dire avant le devis.",
      ["Une décoloration causée par le soleil ou un produit ménager ne revient pas : la couleur est partie, il n'y a plus rien à retirer.",
@@ -887,6 +887,42 @@ zones = hero_page('vitres-exterieur.jpg', "Zones d'intervention", 'Zones', "Le V
 </section>
 {cta()}
 '''
+ML = f'''
+<section class="hero page-hero" style="min-height:auto">
+  <div class="hero-media" style="--pos:50% 40%"><img src="images/vitres-finition.jpg" alt=""></div>
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a><i>›</i><span aria-current="page">Mentions légales</span></nav>
+    <h1>Mentions légales</h1>
+  </div>
+</section>
+<section class="section tight">
+  <div class="wrap wrap-narrow legal">
+    <h2>Éditeur du site</h2>
+    <p><b>Divine Nettoyage</b>, entreprise de nettoyage de vitres et de textiles.<br>
+    Responsable : Jensen<br>
+    Siège (domiciliation) : 60 rue François 1er, 75008 Paris<br>
+    Base d'intervention : 16 rue de la Fontaine Hurée, 95340 Ronquerolles<br>
+    SIRET : {SIRET}<br>
+    Téléphone : <a href="{TEL_HREF}">{TEL}</a> · E-mail : <a href="mailto:{MAIL}">{MAIL}</a></p>
+    <p>Directeur de la publication : Jensen.</p>
+    <h2>Assurance</h2>
+    <p>Responsabilité civile professionnelle souscrite auprès d'ORUS.</p>
+    <h2>Hébergement</h2>
+    <p>Hostinger International Ltd, 61 Lordou Vironos Street, 6023 Larnaca, Chypre. Site : hostinger.fr.</p>
+    <h2>Données personnelles</h2>
+    <p>Les informations envoyées par le formulaire de devis (nom, téléphone, e-mail, adresse, photos, message) servent uniquement à répondre à votre demande et à établir un devis. Elles sont transmises par e-mail à Divine Nettoyage via le service FormSubmit, ne sont ni revendues ni utilisées à d'autres fins, et sont conservées le temps nécessaire au suivi de la relation commerciale.</p>
+    <p>Conformément au RGPD, vous pouvez demander l'accès, la rectification ou la suppression de vos données en écrivant à <a href="mailto:{MAIL}">{MAIL}</a>. Vous pouvez aussi adresser une réclamation à la CNIL (cnil.fr).</p>
+    <h2>Cookies</h2>
+    <p>Ce site ne dépose pas de cookie publicitaire ni de mesure d'audience. Seules les polices de caractères sont chargées depuis Google Fonts.</p>
+    <h2>Propriété intellectuelle</h2>
+    <p>Les textes, photographies et logos de ce site sont la propriété de Divine Nettoyage. Toute reproduction sans autorisation est interdite.</p>
+    <h2>Avis clients</h2>
+    <p>Les avis affichés sont des extraits d'avis publiés par nos clients sur notre fiche Google, consultable sur <a href="{GOOGLE}" target="_blank" rel="noopener">Google</a>.</p>
+  </div>
+</section>
+'''
+page('mentions-legales.html', "Mentions légales | Divine Nettoyage", "Mentions légales, hébergement et données personnelles du site Divine Nettoyage.", ML)
+
 page('zones.html', "Zones d'intervention — Val-d'Oise et Île-de-France | Divine Nettoyage",
      "Nettoyage de canapé, matelas, tapis et vitres à domicile dans le Val-d'Oise (95), à Paris et dans toute l'Île-de-France. Liste des communes desservies.",
      zones, jsonld=[BUSINESS])
@@ -896,8 +932,8 @@ print('ok')
 CATALOG = [
     ('canape', 'sofa', 'Canapé ou fauteuil', 'Tissu, velours, microfibre, alcantara', [
         ('canape2', 'Canapé 2 places', 'dès 160 € · 80 € après crédit d\'impôt', 160),
-        ('canape3', 'Canapé 3 places', 'Prix selon le tissu et l\'état', None),
-        ('canapeAngle', 'Canapé d\'angle ou modulable', 'Prix selon la taille', None),
+        ('canape3', 'Canapé 3 places', 'dès 180 € · 90 € après crédit d\'impôt', 180),
+        ('canapeAngle', 'Canapé d\'angle 5 places et plus', 'dès 198 € · 99 € après crédit d\'impôt', 198),
         ('fauteuil', 'Fauteuil', 'Sur devis', None),
         ('chaise', 'Chaise ou banquette', 'Sur devis, à l\'unité', None)]),
     ('matelas', 'bed', 'Matelas', 'Auréoles, acariens, accidents, odeurs', [

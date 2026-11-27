@@ -558,3 +558,10 @@ p{ margin:0; }
   .ctacard{ padding:34px 24px; }
   .plan .amt{ font-size:2.6rem; }
 }
+
+/* mentions légales */
+.legal h2{ font-size:1.35rem; letter-spacing:-.02em; margin:34px 0 10px; }
+.legal h2:first-child{ margin-top:0; }
+.legal p{ color:var(--ink-2); }
+.legal p + p{ margin-top:10px; }
+.legal a{ color:var(--gold-ink); text-decoration:underline; text-underline-offset:3px; }
