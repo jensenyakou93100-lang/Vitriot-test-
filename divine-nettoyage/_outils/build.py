@@ -383,7 +383,7 @@ BUSINESS = {
     "url": SITE + "/", "email": MAIL, "telephone": "+33699142508", "image": SITE + "/images/partage.jpg",
     "logo": SITE + "/images/icon-512.png", "priceRange": "€€", "currenciesAccepted": "EUR",
     "paymentAccepted": "Carte bancaire, virement, espèces",
-    "address": {"@type": "PostalAddress", "addressLocality": "Ronquerolles", "postalCode": "95340", "addressRegion": "Île-de-France", "addressCountry": "FR"},
+    "address": {"@type": "PostalAddress", "addressRegion": "Île-de-France", "addressCountry": "FR"},
     "areaServed": [{"@type": "AdministrativeArea", "name": d} for d in ZONES.keys()],
     "aggregateRating": {"@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "43"},
     "sameAs": [IG, FB, TT],
@@ -913,7 +913,6 @@ ML = f'''
     <p><b>Divine Nettoyage</b>, entreprise de nettoyage de vitres et de textiles.<br>
     Responsable : Jensen<br>
     Siège (domiciliation) : 60 rue François 1er, 75008 Paris<br>
-    Base d'intervention : 16 rue de la Fontaine Hurée, 95340 Ronquerolles<br>
     SIRET : {SIRET}<br>
     Téléphone : <a href="{TEL_HREF}">{TEL}</a> · E-mail : <a href="mailto:{MAIL}">{MAIL}</a></p>
     <p>Directeur de la publication : Jensen.</p>
